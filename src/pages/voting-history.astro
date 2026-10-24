@@ -1,0 +1,142 @@
+---
+import Base from "../layouts/Base.astro";
+import { extraSources, holderRows, meetings, outcomes, recommendationRows, xai, type HistoryCell } from "../data/history";
+
+function cell(item: HistoryCell) {
+  return item;
+}
+---
+
+<Base
+  title="Voting history"
+  description="Sourced outcomes and proxy-adviser recommendations on major TSLA votes. Unsourced holder votes are marked Not found."
+>
+  <div class="wrap">
+    <p class="eyebrow">Only sourced cells</p>
+    <h1>How past TSLA votes came out.</h1>
+    <p class="lede prose">
+      The first table is what the inspector certified, from Tesla’s Form 8-Ks. The second is how
+      proxy advisers recommended voting, where a news report or a company filing says so. Major
+      holders are listed because their votes matter. Where no N-PX extract, 8-K, or press report is
+      linked, the cell says Not found. That is an empty research result, not an abstention.
+    </p>
+
+    <h2>Certified results</h2>
+    <div class="table-wrap">
+      <table>
+        <caption class="visually-hidden">Company-wide voting results from Tesla Form 8-Ks.</caption>
+        <thead>
+          <tr>
+            <th class="sticky-col">Meeting</th>
+            <th>Result</th>
+            <th>Counts in the filing</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            outcomes.map((item) => (
+              <tr>
+                <td class="sticky-col">
+                  <strong>{item.name}</strong>
+                  <div class="source">{item.meeting}</div>
+                </td>
+                <td><span class="badge ok">{item.result}</span></td>
+                <td>
+                  {item.counts}
+                  <div class="source">{item.note}</div>
+                </td>
+                <td>
+                  <a href={item.href}>{item.source}</a>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Recommendations and holder votes</h2>
+    <p class="prose">
+      “For” and “Against” in this table are recommendations, except where a future cell cites an
+      N-PX filing for an actual instruction. None of the institutional rows below have that citation yet.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <caption>
+          Scroll sideways on a small screen. The first column stays put.
+        </caption>
+        <thead>
+          <tr>
+            <th class="sticky-col">Voter</th>
+            {meetings.map((meeting) => (
+              <th>
+                {meeting.name}
+                <div class="source">{meeting.date}</div>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {
+            [...recommendationRows, ...holderRows].map((row) => (
+              <tr>
+                <th class="sticky-col" scope="row">
+                  {row.name}
+                  <div class="source">{row.note}</div>
+                </th>
+                {
+                  meetings.map((meeting) => {
+                    const item = cell(row.cells[meeting.id]);
+                    if (item.status === "not-found") {
+                      return (
+                        <td>
+                          <abbr title="No N-PX filing, company 8-K, or press report is linked for this holder and meeting.">
+                            Not found
+                          </abbr>
+                        </td>
+                      );
+                    }
+                    return (
+                      <td>
+                        <span class={item.label === "For" ? "badge ok" : "badge no"}>{item.label}</span>
+                        <div>{item.detail}</div>
+                        <div class="source">
+                          <a href={item.href}>{item.source}</a>
+                          {meeting.id === "texas2024" && row.name.startsWith("ISS") && (
+                            <>
+                              {" "}
+                              · <a href={extraSources.cnbcIss2024}>CNBC</a>
+                            </>
+                          )}
+                          {meeting.id === "texas2024" && row.name.startsWith("Glass") && (
+                            <>
+                              {" "}
+                              · <a href={extraSources.teslaGlLetter}>Tesla letter</a>
+                            </>
+                          )}
+                          <br />
+                          {item.asOf}
+                        </div>
+                      </td>
+                    );
+                  })
+                }
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <section class="prose">
+      <h2>The xAI proposal is the clearest recent count</h2>
+      <p>{xai.prose}</p>
+      <p>Certified counts: {xai.counts}</p>
+      <p class="source">
+        <a href={xai.href}>{xai.source}</a> · meeting {xai.meeting}
+      </p>
+      <p>It is not one of the five columns above because it was a shareholder proposal, not one of those five corporate items. The same 8-K is the source.</p>
+    </section>
+  </div>
+</Base>

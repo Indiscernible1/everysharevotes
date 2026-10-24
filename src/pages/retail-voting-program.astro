@@ -1,0 +1,99 @@
+---
+import Base from "../layouts/Base.astro";
+
+const page = "https://ir.tesla.com/voluntary-retail-voting-program";
+const defa = "https://www.sec.gov/Archives/edgar/data/1318605/000110465926116716/tm267596d6_defa14a.htm";
+---
+
+<Base
+  title="Retail voting program"
+  description="A neutral explanation of Tesla’s voluntary retail voting program: standing instructions, the two options, and what they do not do."
+>
+  <div class="wrap prose">
+    <p class="eyebrow">Voluntary · with the board · not this site’s recommendation</p>
+    <h1>The retail voting program, in plain English.</h1>
+    <p class="lede">
+      The company adopted a program that lets a retail holder leave a standing instruction to vote
+      with the board at later meetings. It is free to join and free to leave. This page does not
+      suggest either option.
+    </p>
+    <p class="source">
+      Company page: <a href={page}>ir.tesla.com/voluntary-retail-voting-program</a><br />
+      SEC copy of the enrollment screens and terms:
+      <a href={defa}>DEFA14A filed October 19, 2026</a>
+    </p>
+
+    <h2>What enrolling does</h2>
+    <p>
+      After a holder votes at the 2026 annual meeting on most electronic platforms, including
+      ProxyVote.com and Say by Robinhood, the platform can offer enrollment. The company’s materials
+      say you cannot enroll on the investor-relations page itself, because the instruction has to be
+      tied to the brokerage account through the proxy distributor.
+    </p>
+    <p>
+      The standing instruction applies to future meetings: any meeting, including an adjournment,
+      for which a definitive proxy has <strong>not yet been filed</strong>. The company says it does
+      <strong>not</strong> vote the December 3, 2026 annual meeting. A holder still has to vote that
+      meeting from its own proxy.
+    </p>
+    <p>
+      If the holder does nothing at a later meeting, the shares covered by the instruction are voted
+      with the board recommendation for the matters the holder selected. The holder still receives
+      the proxy and can override the instruction by voting. The company’s terms say the most recent
+      vote submitted before the polls close takes precedence.
+    </p>
+
+    <h2>The two options</h2>
+    <div class="grid-2">
+      <article class="card">
+        <p class="kicker">Option 1</p>
+        <h3>All matters</h3>
+        <p>
+          Eligible shares are voted with the board’s recommendation on each proposal. The enrollment
+          screen says that includes every proposal. A merger, acquisition, or sale that is put to
+          shareholders would be included.
+        </p>
+        <p>
+          The company also says a holder who picks this option gets a reminder before a meeting that
+          includes a “special matter.”
+        </p>
+      </article>
+      <article class="card">
+        <p class="kicker">Option 2</p>
+        <h3>All matters except certain specified matters</h3>
+        <p>
+          Same board-aligned instruction, except two kinds of items the company calls special
+          matters: a contested director election, and any acquisition, merger, or divestiture that
+          state law or exchange rules require shareholders to approve.
+        </p>
+        <p>
+          On those items, this option does not cast the standing instruction. The holder would vote
+          them, or leave them unvoted, in the ordinary way.
+        </p>
+      </article>
+    </div>
+    <p class="source">
+      Wording from the enrollment screen in the <a href={defa}>October 19, 2026 DEFA14A</a> and the
+      company’s <a href={page}>program page</a>.
+    </p>
+
+    <h2>Leaving, and the timing trap</h2>
+    <ul class="clean">
+      <li>The terms say a holder can cancel at any time, at no cost, from the account dashboard or from the annual reminder.</li>
+      <li>If the cancellation comes after a definitive proxy for a meeting has already been filed, the terms say the cancellation applies to meetings after that one.</li>
+      <li>Overriding a single meeting is different from cancelling. Voting the proxy for that meeting overrides the instruction for the proposals voted.</li>
+      <li>A reminder goes out at least annually. Option 1 also gets a reminder before a special matter.</li>
+    </ul>
+    <div class="callout">
+      <p>
+        <strong>A combination proxy filed later would be a “future meeting” under these terms.</strong>
+      </p>
+      <p>
+        Option 1 would vote it with the board unless the holder votes that proxy or had already
+        opted out before the proxy was filed. Option 2 carves mergers out. None of that is a
+        recommendation. Read the terms on the company’s page before choosing.
+      </p>
+    </div>
+    <p><a href="/how-to-vote/">How ballots are delivered, broker by broker.</a></p>
+  </div>
+</Base>

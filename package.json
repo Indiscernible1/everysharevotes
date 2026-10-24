@@ -1,0 +1,28 @@
+{
+  "name": "everysharevotes",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Independent, neutral guide for TSLA shareholders.",
+  "scripts": {
+    "dev": "astro dev --host 0.0.0.0",
+    "build": "astro build",
+    "preview": "astro preview --host 0.0.0.0 --port 4321",
+    "check": "astro check",
+    "test:13f": "python3 scripts/test_thirteen_f.py",
+    "fetch:13f": "python3 scripts/fetch_13f.py"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@fontsource/newsreader": "^5.2.8",
+    "@fontsource/public-sans": "^5.2.6",
+    "astro": "^5.14.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "typescript": "^5.9.2",
+    "wrangler": "^4.42.0"
+  }
+}

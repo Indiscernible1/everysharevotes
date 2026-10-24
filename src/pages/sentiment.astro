@@ -1,0 +1,48 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="Sentiment"
+  description="An unscientific one-response-per-browser poll about a possible combination. Not a share vote and not a representative sample."
+>
+  <div class="wrap prose">
+    <p class="eyebrow">Unscientific · one response per browser</p>
+    <h1>Which way do holders lean today?</h1>
+    <p class="lede">
+      If TSLA shareholders are asked to vote on a combination with SpaceX, which way do you lean
+      today? There is no proposal. This question is not that vote.
+    </p>
+    <ul class="clean">
+      <li>Not a scientific poll. People who find this site are not a sample of shareholders.</li>
+      <li>Not weighted by shares. One browser, one stored response.</li>
+      <li>The id lives in an HttpOnly cookie. Clearing site data allows another response. That is a limit of the design, not a security claim.</li>
+      <li>Counts come only from the database. This page never shows a made-up tally.</li>
+    </ul>
+    <form id="poll-form" class="poll">
+      <fieldset>
+        <legend class="visually-hidden">Your lean, if a combination is proposed later</legend>
+        <label class="choice">
+          <input type="radio" name="choice" value="favor" required />
+          <span><strong>Lean in favor</strong><br />You would lean toward voting yes, on terms you have not seen.</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="choice" value="against" />
+          <span><strong>Lean against</strong><br />You would lean toward voting no, on terms you have not seen.</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="choice" value="undecided" />
+          <span><strong>Undecided</strong><br />You are waiting for a proxy, or you do not have a lean.</span>
+        </label>
+      </fieldset>
+      <button type="submit">Store my response</button>
+      <p id="poll-status" class="status" role="status">Loading the tally…</p>
+      <div id="poll-results" class="tally" aria-live="polite"></div>
+    </form>
+  </div>
+</Base>
+
+<script>
+  import { mountPoll } from "../scripts/poll";
+  mountPoll();
+</script>

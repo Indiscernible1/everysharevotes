@@ -1,0 +1,59 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="About"
+  description="Every Share Votes is an independent shareholder project by Jason Crawford. Not affiliated with Tesla or SpaceX. Not investment advice."
+>
+  <div class="wrap prose">
+    <p class="eyebrow">About this project</p>
+    <h1>Independent shareholder project.</h1>
+    <p class="lede">
+      Not affiliated with Tesla or SpaceX. Not investment advice.
+    </p>
+    <p>
+      Every Share Votes is maintained by Jason Crawford, an independent retail shareholder. He is
+      not an officer, director, employee, or agent of Tesla, Inc. or SpaceX, and he does not speak
+      for either company. The site uses “TSLA” for the stock. It uses the company name when a filing
+      or a statute uses it. The name and the check-mark logo are not the companies’ marks.
+    </p>
+    <h2>What this is</h2>
+    <ul class="clean">
+      <li>A plain-English reading of public filings about a possible combination.</li>
+      <li>A map to the company’s own voting instructions and retail voting program.</li>
+      <li>A table of Form 13F positions, generated from the SEC’s quarterly data set.</li>
+      <li>A voting-history table that leaves a cell blank of any number unless a filing or a press report is linked.</li>
+      <li>An unscientific sentiment poll, labeled as such.</li>
+    </ul>
+    <h2>What this is not</h2>
+    <ul class="clean">
+      <li>Not a recommendation to buy, sell, or hold, and not a recommendation to vote for or against anything.</li>
+      <li>Not a proxy solicitation. If a proxy is filed, read that proxy.</li>
+      <li>Not legal advice about Texas law or about any account’s voting rights.</li>
+      <li>Not a complete list of shareholders. Form 13F misses retail holders, many non-U.S. holders, and insider forms.</li>
+    </ul>
+    <h2>How the 13F file is made</h2>
+    <p>
+      <code>scripts/fetch_13f.py</code> reads the newest ZIP on the SEC’s
+      <a href="https://www.sec.gov/data-research/sec-markets-data/form-13f-data-sets">Form 13F data sets</a>
+      page, keeps CUSIP 88160R101, drops put and call rows, and keeps the latest 13F-HR or amendment
+      for each manager and report period. The script sends a User-Agent with a contact address and
+      waits between requests. A weekly GitHub Action runs the same script and opens a pull request
+      when the JSON changes. Set the repository secret <code>SEC_CONTACT_EMAIL</code> to a mailbox
+      a person monitors.
+    </p>
+    <h2>How the poll is stored</h2>
+    <p>
+      Cloudflare Pages runs <code>functions/api/sentiment.ts</code> against a D1 database bound as
+      <code>DB</code>. The schema is <code>migrations/0001_sentiment.sql</code>. Nothing is seeded.
+      If the binding is missing, the poll says so and shows no tally.
+    </p>
+    <h2>Corrections</h2>
+    <p>
+      A number on this site should have a source link and a date. If a filing is amended, the page
+      should follow the amendment. Institutional vote cells stay “Not found” until someone links the
+      N-PX filing or a report that states the vote.
+    </p>
+  </div>
+</Base>

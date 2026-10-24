@@ -1,0 +1,107 @@
+---
+import Base from "../layouts/Base.astro";
+
+const brokers = [
+  "Schwab",
+  "Fidelity",
+  "Robinhood",
+  "Webull",
+  "E*TRADE/Morgan Stanley",
+  "Vanguard",
+  "Interactive Brokers",
+  "Merrill",
+  "SoFi",
+  "Public",
+  "Other",
+];
+const sitekey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "";
+---
+
+<Base
+  title="Add my shares"
+  description="Add a self-reported TSLA share change for or against a possible combination with SpaceX. Unverified and not an official vote."
+>
+  <meta slot="head" name="turnstile-sitekey" content={sitekey} />
+  <div class="wrap">
+    <p class="eyebrow">Self-reported ledger · not an official vote</p>
+    <h1>Add my shares.</h1>
+    <p class="lede">
+      Each submission is a new row: a stance, a broker, and a share change. Add another broker later, or send a negative number to correct an earlier row.
+    </p>
+    <p id="live-totals" class="score-meta">Loading totals…</p>
+    <p id="held-note" class="source"></p>
+
+    <form id="share-form" class="share-form">
+      <fieldset>
+        <legend>Your stance on a SpaceX combination</legend>
+        <label class="choice">
+          <input type="radio" name="stance" value="for" required />
+          <span><strong>For</strong><br />You would lean toward a combination, on terms you have not seen.</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="stance" value="against" />
+          <span><strong>Against</strong><br />You would lean against a combination.</span>
+        </label>
+        <label class="choice">
+          <input type="radio" name="stance" value="undecided" />
+          <span><strong>Undecided</strong><br />You hold the shares and do not have a lean.</span>
+        </label>
+      </fieldset>
+      <div class="form-row">
+        <label class="field">
+          Broker
+          <select name="broker" required>
+            <option value="">Choose</option>
+            {brokers.map((broker) => <option value={broker}>{broker}</option>)}
+          </select>
+        </label>
+        <label class="field">
+          Share change
+          <input name="shares" type="number" inputmode="numeric" step="1" required placeholder="60" />
+        </label>
+      </div>
+      <p class="source">Use a minus to reduce a prior entry at the same broker and stance. The counted net cannot go below zero. The same change at the same broker is stored once. An entry over 100,000 shares is held for review and left out of the totals.</p>
+      <div id="turnstile"></div>
+      <button type="submit">Add to the tally</button>
+      <p id="share-status" class="status" role="status"></p>
+    </form>
+
+    <h2>By broker</h2>
+    <div class="table-wrap">
+      <table>
+        <caption class="visually-hidden">Counted shares by broker and stance.</caption>
+        <thead>
+          <tr>
+            <th>Broker</th>
+            <th>For</th>
+            <th>Against</th>
+            <th>Undecided</th>
+          </tr>
+        </thead>
+        <tbody id="broker-body">
+          <tr><td colspan="4">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Change over time</h2>
+    <div id="sentiment-chart" class="chart"></div>
+    <p id="chart-note" class="source"></p>
+
+    <h2>Rows on this browser</h2>
+    <ul id="your-rows" class="clean"></ul>
+    <p class="source">
+      The site stores a salted hash of the network address and a browser token. It does not store the raw address.
+      Clearing site data starts a new token. This is the same kind of limit as an ordinary web counter.
+      <a href="/methodology/">Methodology</a>.
+    </p>
+  </div>
+</Base>
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+<script>
+  import { mountShareForm } from "../scripts/share-form";
+  import { mountDashboard } from "../scripts/dashboard";
+  mountShareForm();
+  mountDashboard(true);
+</script>

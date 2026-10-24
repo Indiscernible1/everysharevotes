@@ -1,0 +1,198 @@
+---
+import Base from "../layouts/Base.astro";
+import { formatInt, formatPeriod, formatUsd } from "../lib/format";
+import holdersFile from "../../public/data/holders.json";
+
+type Holder = {
+  filingManager: string;
+  shares: number;
+  valueUsd: number;
+  votingSole: number;
+  votingShared: number;
+  votingNone: number;
+  reportPeriod: string;
+  filingDate: string;
+  sourceUrl: string;
+  isAmendment: boolean;
+};
+
+type Doc = {
+  generatedAt: string | null;
+  primaryReportPeriod: string | null;
+  source: { datasetUrl: string | null; datasetLabel: string | null; datasetPage: string; documentation: string };
+  method: { included: string; amendments: string; doubleCount: string; omitted: string };
+  periods: { reportPeriod: string; managers: number }[];
+  stats: { managers: number; optionRowsExcluded: number; infoRowsUsed: number };
+  holders: Holder[];
+  pending?: string;
+};
+
+const doc = holdersFile as Doc;
+const primary = doc.primaryReportPeriod;
+const preview = doc.holders.filter((row) => !primary || row.reportPeriod === primary).slice(0, 25);
+const primaryCount = doc.periods.find((period) => period.reportPeriod === primary)?.managers ?? 0;
+const vanguardNames = new Set(
+  doc.holders
+    .filter((row) => row.reportPeriod === primary && /vanguard/i.test(row.filingManager))
+    .map((row) => row.filingManager),
+);
+---
+
+<Base
+  title="Who holds TSLA"
+  description="Sortable Form 13F holdings for CUSIP 88160R101, with each row linked to the EDGAR filing and the report period labeled."
+>
+  <div class="wrap" data-holders-app>
+    <p class="eyebrow">Form 13F · CUSIP 88160R101</p>
+    <h1>Who files a holding in TSLA.</h1>
+    <p class="lede prose">
+      Each row is one institutional manager’s Form 13F, not a person and not a retail account.
+      Parents and sub-advisers sometimes report the same shares. Adding the column will double-count.
+    </p>
+
+    {
+      doc.holders.length === 0 ? (
+        <div class="callout">
+          <p>
+            <strong>No holdings file has been generated.</strong>
+          </p>
+          <p>{doc.pending}</p>
+        </div>
+      ) : (
+        <div class="prose">
+          <p>
+            {formatInt(primaryCount)} filing managers report this CUSIP for the{" "}
+            {formatPeriod(primary)}. The file was built {doc.generatedAt} from{" "}
+            <a href={doc.source.datasetUrl ?? doc.source.datasetPage}>{doc.source.datasetLabel}</a>.
+            {" "}
+            {formatInt(doc.stats.optionRowsExcluded)} put or call rows were left out of the share
+            counts. Values are the dollar amounts in the SEC data set.
+          </p>
+          <p class="source">
+            Dataset index: <a href={doc.source.datasetPage}>SEC Form 13F data sets</a>
+            <br />
+            Column definitions: <a href={doc.source.documentation}>SEC 13F data-set readme</a>
+            <br />
+            {doc.method.included} {doc.method.amendments}
+          </p>
+          <p>{doc.method.doubleCount} {doc.method.omitted}</p>
+          {
+            vanguardNames.size > 1 && (
+              <p>
+                For the {formatPeriod(primary)}, {vanguardNames.size} filing-manager names contain
+                “Vanguard.” They are separate rows because they are separate 13F filers. This page
+                does not combine them.
+              </p>
+            )
+          }
+        </div>
+      )
+    }
+
+    <h2>Pass-through voting programs</h2>
+    <p class="prose">
+      Some managers let certain fund investors choose a voting policy. Eligibility is in the firm’s
+      own materials. A name match in the table is not a statement of how that manager voted.
+    </p>
+    <div class="grid-2">
+      <article class="card">
+        <h3>BlackRock Voting Choice</h3>
+        <p>BlackRock’s page describes which funds and account types can pick a voting policy.</p>
+        <p class="source">
+          <a href="https://www.blackrock.com/corporate/about-us/investment-stewardship/blackrock-voting-choice">blackrock.com voting choice</a>
+          · link checked October 24, 2026
+        </p>
+      </article>
+      <article class="card">
+        <h3>Vanguard Investor Choice</h3>
+        <p>Vanguard’s stewardship page describes Investor Choice for eligible investors.</p>
+        <p class="source">
+          <a href="https://corporate.vanguard.com/content/corporatesite/us/en/corp/how-we-advocate/investment-stewardship/investor-choice.html">Vanguard Investor Choice</a>
+          · link checked October 24, 2026
+        </p>
+      </article>
+      <article class="card">
+        <h3>State Street proxy voting choice</h3>
+        <p>State Street’s asset-stewardship page describes its proxy voting choice program.</p>
+        <p class="source">
+          <a href="https://www.ssga.com/us/en/intermediary/ic/capabilities/esg/asset-stewardship/proxy-voting-choice">State Street proxy voting choice</a>
+          · link checked October 24, 2026
+        </p>
+      </article>
+    </div>
+
+    <h2>The filings</h2>
+    <div class="controls">
+      <label class="field">
+        Search manager
+        <input id="holder-search" type="search" placeholder="Type a filing-manager name" autocomplete="off" />
+      </label>
+      <label class="field">
+        Report period
+        <select id="holder-period">
+          {
+            doc.periods.map((period) => (
+              <option value={period.reportPeriod} selected={period.reportPeriod === primary}>
+                {formatPeriod(period.reportPeriod)} ({formatInt(period.managers)})
+              </option>
+            ))
+          }
+          <option value="">All periods in this file</option>
+        </select>
+      </label>
+    </div>
+    <p id="holder-count" class="status" aria-live="polite">
+      {doc.holders.length === 0 ? "No rows." : `Showing the first ${preview.length} managers for the default period until search is available.`}
+    </p>
+    <p id="static-note" class="source">
+      Without JavaScript, this table is the 25 largest positions for the default report period. The
+      full file is <a href="/data/holders.json">holders.json</a>.
+    </p>
+    <div class="table-wrap">
+      <table>
+        <caption class="visually-hidden">
+          Institutional Form 13F positions in CUSIP 88160R101. Each source link is that manager’s EDGAR index.
+        </caption>
+        <thead>
+          <tr>
+            <th class="sticky-col" aria-sort="none"><button class="sort" type="button" data-sort="filingManager">Manager</button></th>
+            <th class="num" aria-sort="descending"><button class="sort" type="button" data-sort="shares">Shares</button></th>
+            <th class="num" aria-sort="none"><button class="sort" type="button" data-sort="valueUsd">Value</button></th>
+            <th>Voting authority</th>
+            <th aria-sort="none"><button class="sort" type="button" data-sort="reportPeriod">Report period</button></th>
+            <th aria-sort="none"><button class="sort" type="button" data-sort="filingDate">Filed</button></th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody id="holder-rows">
+          {
+            preview.map((row) => (
+              <tr>
+                <td class="sticky-col" data-label="Manager">
+                  {row.filingManager}
+                  {row.isAmendment ? " (amendment)" : ""}
+                </td>
+                <td class="num" data-label="Shares">{formatInt(row.shares)}</td>
+                <td class="num" data-label="Value reported">{formatUsd(row.valueUsd)}</td>
+                <td data-label="Voting authority">
+                  {formatInt(row.votingSole)} sole · {formatInt(row.votingShared)} shared · {formatInt(row.votingNone)} none
+                </td>
+                <td data-label="Report period">{formatPeriod(row.reportPeriod)}</td>
+                <td data-label="Filed">{row.filingDate}</td>
+                <td data-label="Filing">
+                  <a href={row.sourceUrl}>13F index</a>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+    <div id="holder-pager" class="pager"></div>
+  </div>
+</Base>
+
+<script>
+  import { mountHolders } from "../scripts/holders";
+  mountHolders();
+</script>

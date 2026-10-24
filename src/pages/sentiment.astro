@@ -1,0 +1,91 @@
+---
+import Base from "../layouts/Base.astro";
+import sentiment from "../../public/data/sentiment.json";
+
+const file = sentiment as {
+  generatedAt?: string | null;
+  media?: { method?: string; query?: string; points?: unknown[] };
+  market?: {
+    primary?: { question?: string; url?: string; points?: unknown[] } | null;
+    venues?: { venue?: string; question?: string | null; yes?: number | null; url?: string; inChart?: boolean; note?: string; status?: string }[];
+  };
+};
+const venues = file.market?.venues ?? [];
+---
+
+<Base
+  title="Sentiment"
+  description="Retail share-weighted sentiment, a headline score, and prediction-market odds for a Tesla–SpaceX combination. Missing series are left empty."
+>
+  <div class="wrap">
+    <p class="eyebrow">Three series · no filled-in days</p>
+    <h1>Sentiment over time.</h1>
+    <p class="lede">
+      Retail is the live share tally. Media and the market line come from the daily file. A missing source is a gap, not a zero.
+    </p>
+    <p class="actions">
+      <a class="button" href="/add-shares/">Add my shares</a>
+      <a class="button secondary" href="/methodology/">Methodology</a>
+    </p>
+    <div id="sentiment-chart" class="chart"></div>
+    <p id="chart-note" class="source"></p>
+    <p class="score-meta" id="score-meta"></p>
+    <p class="visually-hidden" id="for-shares"></p>
+    <p class="visually-hidden" id="against-shares"></p>
+
+    <h2>What is in the file</h2>
+    <p class="source">Generated {file.generatedAt ?? "not yet"}.</p>
+    <ul class="clean">
+      <li>
+        Retail: percent For among For and Against, from counted ledger rows. Undecided shares are not in the percent.
+      </li>
+      <li>
+        Media: {file.media?.method === "none" ? "no points in this file." : file.media?.method} Query: {file.media?.query}.
+        {file.media?.points?.length ?? 0} days.
+      </li>
+      <li>
+        Market line: {file.market?.primary ? file.market.primary.question : "No market yet."}
+        {file.market?.primary?.points?.length ?? 0} daily YES snapshots.
+        {file.market?.primary?.url && <a href={file.market.primary.url}>Market page</a>}
+      </li>
+    </ul>
+
+    <h2>Other markets, not blended</h2>
+    <div class="table-wrap">
+      <table>
+        <caption>Each row is a different question or venue. Only the charted Polymarket contract is in the line.</caption>
+        <thead>
+          <tr>
+            <th>Venue</th>
+            <th>Question</th>
+            <th>Latest YES</th>
+            <th>In the line</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            venues.map((venue) => (
+              <tr>
+                <td>{venue.venue}</td>
+                <td>
+                  {venue.question ? (
+                    venue.url ? <a href={venue.url}>{venue.question}</a> : venue.question
+                  ) : (
+                    venue.note || "No market yet"
+                  )}
+                </td>
+                <td>{typeof venue.yes === "number" ? `${(venue.yes * 100).toFixed(1)}%` : "—"}</td>
+                <td>{venue.inChart ? "Yes" : "No"}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</Base>
+
+<script>
+  import { mountDashboard } from "../scripts/dashboard";
+  mountDashboard(false);
+</script>

@@ -1,0 +1,105 @@
+---
+import Base from "../layouts/Base.astro";
+import sentiment from "../../public/data/sentiment.json";
+
+const file = sentiment as {
+  generatedAt?: string | null;
+  media?: {
+    method?: string;
+    query?: string;
+    source?: string;
+    sourceUrl?: string;
+    rescale?: string;
+    requests?: { url: string; status: number; points: number }[];
+    lexicon?: { positive?: string[]; negative?: string[] };
+    points?: unknown[];
+  };
+  market?: {
+    primary?: { question?: string; marketId?: string; url?: string; historyUrl?: string; points?: unknown[] } | null;
+    kalshi?: { status?: string; queries?: { url: string; status: number }[]; matches?: unknown[] };
+  };
+};
+---
+
+<Base
+  title="Methodology"
+  description="How the share ledger, headline score, and prediction-market line are built. No fabricated points."
+>
+  <div class="wrap prose">
+    <p class="eyebrow">Methods</p>
+    <h1>How these numbers are made.</h1>
+    <p class="lede">
+      The tally is self-reported and unverified. It is not an official vote, not a proxy, and not a sample of all holders.
+    </p>
+
+    <h2>Share ledger</h2>
+    <p>
+      A holder posts a stance (For, Against, or Undecided), a broker, and a whole-number share change.
+      The change can be negative. +60 at Schwab and later +50 at Webull are two rows. −20 at Schwab reduces the Schwab row for that stance.
+      The counted net for one browser, one broker, and one stance cannot go below zero.
+    </p>
+    <p>
+      An identical repeat is rejected: the same salted address hash, the same browser token, the same broker, and the same signed share change.
+      A different broker, or a different number, is a new row. The stance is not part of that duplicate check, so the same number cannot be posted twice at one broker just by switching stance.
+    </p>
+    <p>
+      The raw network address is not stored. The server hashes it with a secret salt. The browser token is an HttpOnly cookie.
+      More than 8 submissions an hour, or 30 in a day, from the same hash are refused.
+      An absolute change above 100,000 shares is stored as held and left out of the public totals until a review token accepts it.
+      Changes above one billion shares are rejected.
+    </p>
+    <p>
+      Holder count is the number of distinct hash-and-token pairs whose counted shares, across brokers and stances, are above zero.
+      The retail line is For divided by For plus Against, only when that denominator is above zero. Undecided shares are shown in the totals and are not in the percent.
+      Days with no new counted rows are not backfilled, except that the latest cumulative total is carried to today and marked as carried forward.
+    </p>
+    <p>
+      Cloudflare Turnstile has to succeed before a row is stored. On a public host the test secret is rejected. If the salt or the Turnstile secret is missing, the API returns an error and the page does not pretend the total is zero.
+    </p>
+
+    <h2>Prediction markets</h2>
+    <p>
+      The market line is the YES price for one Polymarket contract: “{file.market?.primary?.question ?? "Tesla and SpaceX merger officially announced by December 31?"}”
+      (market {file.market?.primary?.marketId ?? "2252540"}). Each point is the last price the CLOB history returned for that UTC day.
+      Other deadlines on the same event, and Manifold markets with different wording, are listed on the sentiment page and are not averaged in.
+      {file.market?.primary?.url && <a href={file.market.primary.url}>Polymarket page</a>}
+      {file.market?.primary?.historyUrl && <> · <a href={file.market.primary.historyUrl}>price history</a></>}
+    </p>
+    <p>
+      Kalshi, at the last check ({file.generatedAt ?? "not yet"}): {file.market?.kalshi?.status === "no-market" ? "no matching open market in the pages requested." : file.market?.kalshi?.status}.
+      The chart says “No market yet” for a venue with no returned price. It does not draw a stand-in.
+    </p>
+
+    <h2>Headlines</h2>
+    <p>
+      The media series uses the GDELT DOC 2.0 API. Query: <code>{file.media?.query}</code>. Timespan: three months.
+      {file.media?.method === "gdelt-tone" && " This file uses GDELT’s average tone."}
+      {file.media?.method === "title-lexicon" && " GDELT did not return a tone timeline, so titles from the article list were scored with the word lists below."}
+      {file.media?.method === "none" && " This file has no media points. The requests did not return a tone series or a scored article list."}
+      {" "}
+      {file.media?.points?.length ?? 0} days are stored. Days without a returned value are not drawn as zero.
+    </p>
+    <p>{file.media?.rescale}</p>
+    <p>
+      Positive words: {(file.media?.lexicon?.positive ?? []).join(", ") || "none listed"}.
+      Negative words: {(file.media?.lexicon?.negative ?? []).join(", ") || "none listed"}.
+      A title that contains neither scores as neutral when the lexicon method is the one in use.
+    </p>
+    <ul class="clean">
+      {
+        (file.media?.requests ?? []).map((request) => (
+          <li>
+            HTTP {request.status}, {request.points} points, <a href={request.url}>request</a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="source">File generated {file.generatedAt ?? "not yet"}. <code>scripts/fetch_sentiment.py</code> rewrites it. A daily Action opens a pull request when the file changes.</p>
+
+    <h2>Institutional votes</h2>
+    <p>
+      <code>scripts/fetch_npx.py</code> searches EDGAR full text for CUSIP 88160R101 on Form N-PX, keeps filings whose names match BlackRock/iShares, Vanguard, State Street/SPDR, Fidelity, Geode, or Capital Group/American Funds, and reads the XML vote table for the periods ended June 30, 2024 and June 30, 2026.
+      A cell is filled only from parsed rows. Norges Bank does not file N-PX. The 2016 and 2018 meetings are not parsed from older text filings unless a later run actually reads them.
+    </p>
+  </div>
+</Base>

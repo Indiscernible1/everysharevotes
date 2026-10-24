@@ -1,0 +1,85 @@
+---
+import Base from "../layouts/Base.astro";
+import { brokers, otherBrokers, voteGuide } from "../data/brokers";
+---
+
+<Base
+  title="How to vote"
+  description="Broker-by-broker voting steps from Tesla’s shareholder vote guide, with a clear note that no combination proxy has been filed."
+>
+  <div class="wrap">
+    <section class="prose">
+      <p class="eyebrow">No combination ballot exists yet</p>
+      <h1>How TSLA shares get voted.</h1>
+      <p class="lede">
+        A combination would be voted only after a proxy names a record date and a meeting. This
+        page collects the company’s own broker instructions so holders know the path. It does not
+        invent menu clicks the company did not publish.
+      </p>
+      <div class="callout">
+        <p>
+          <strong>Do not reuse an old control number.</strong>
+          Tesla’s vote guide, retrieved October 24, 2026, tells holders to search for emails
+          received in 2025 and refers to a September 15 record date. It does not say which year
+          that September 15 was. The December 3, 2026 annual meeting has its own proxy, filed
+          October 19, 2026. A later combination would have another one.
+        </p>
+        <p class="source">
+          <a href={voteGuide.href}>Tesla shareholder vote guide</a> · retrieved {voteGuide.asOf}<br />
+          <a href="https://www.sec.gov/Archives/edgar/data/1318605/000110465926116716/tm267596d6_defa14a.htm">DEFA14A</a>
+          · 2026 annual meeting on December 3, 2026 · proxy filed October 19, 2026
+        </p>
+      </div>
+      <h2>Before the broker list</h2>
+      <ul class="clean">
+        <li>You vote the shares you held on the record date printed in that meeting’s proxy. Shares bought after the record date are not in that vote.</li>
+        <li>Shares inside a mutual fund or ETF are voted by the manager unless the fund offers a pass-through program. See <a href="/holders/">Who holds TSLA</a>.</li>
+        <li>A standing instruction under the <a href="/retail-voting-program/">retail voting program</a> can vote a future meeting with the board. It does not vote the December 3, 2026 annual meeting. Option 2 leaves mergers to you.</li>
+        <li>If no instructions arrive, Tesla’s guide says to ask the broker whether it offers proxy voting. Some brokers outside the United States do not.</li>
+      </ul>
+      <p>
+        The guide lists {voteGuide.solicitor} at {voteGuide.phoneUs} from the United States or Canada
+        and {voteGuide.phoneIntl} from elsewhere, for questions about how to vote. Those numbers are
+        the ones printed on that page as of {voteGuide.asOf}.
+      </p>
+    </section>
+
+    <h2>Broker by broker</h2>
+    <p class="prose">
+      Each block is Tesla’s published instruction, not a separate walkthrough. Webull is absent from
+      the company’s list, so that card points at the “all other brokers” steps.
+    </p>
+    <div class="grid-2">
+      {
+        brokers.map((broker) => (
+          <article class="broker">
+            <p class="kicker">{broker.inTeslaGuide ? "On Tesla’s guide" : "Not on Tesla’s guide"}</p>
+            <h3>{broker.name}</h3>
+            <ol class="steps">
+              {broker.steps.map((step) => (
+                <li>{step}</li>
+              ))}
+            </ol>
+            <p class="source">
+              <a href={voteGuide.href}>Tesla vote guide</a> · retrieved {voteGuide.asOf}
+            </p>
+          </article>
+        ))
+      }
+    </div>
+
+    <section class="prose">
+      <h2>All other brokers</h2>
+      <p>Tesla’s guide says to try these searches in email received in 2025:</p>
+      <ul class="clean">
+        {otherBrokers.map((step) => <li>{step}</li>)}
+      </ul>
+      <p>
+        Schwab’s card is the only one where the company’s guide also describes voting inside the
+        brokerage site and at proxyvote.com with a 16-digit control number. For the other named
+        brokers, the published step is the email.
+      </p>
+      <p><a class="button" href={voteGuide.href}>Open Tesla’s vote guide</a></p>
+    </section>
+  </div>
+</Base>

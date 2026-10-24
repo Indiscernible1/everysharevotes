@@ -1,0 +1,158 @@
+---
+import Base from "../layouts/Base.astro";
+import { xai, supermajority2025 } from "../data/history";
+
+const tesla10q = "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm";
+const spacex10q = "https://www.sec.gov/Archives/edgar/data/1181412/000162828026066880/spcx-20260930.htm";
+const charter = "https://www.sec.gov/Archives/edgar/data/1318605/000162828024032662/tsla-2024x06x30xex31.htm";
+const tboc457 = "https://statutes.capitol.texas.gov/Docs/BO/htm/BO.21.htm#21.457";
+const tboc365 = "https://statutes.capitol.texas.gov/Docs/BO/htm/BO.21.htm#21.365";
+---
+
+<Base
+  title="The vote"
+  description="What the October 22, 2026 filings say about a possible combination, and why the voting threshold is unconfirmed until a proxy is filed."
+>
+  <div class="wrap prose">
+    <p class="eyebrow">Unconfirmed until a proxy is filed</p>
+    <h1>What is known, and what would have to be voted.</h1>
+    <p class="lede">
+      Two special committees are looking. Nobody has published terms. This page stays inside the
+      filings, the Texas statute, and the certificate of formation already on EDGAR.
+    </p>
+
+    <h2>What the filings say</h2>
+    <p>
+      The TSLA issuer’s Form 10-Q for the quarter ended September 30, 2026, filed October 22, 2026,
+      says:
+    </p>
+    <blockquote>
+      <p>
+        The Tesla board of directors has formed a special committee (the “Special Committee”)
+        comprising disinterested directors to explore deepening Tesla’s relationship with SpaceX,
+        which could be through certain arrangements including without limitation a business
+        combination (a “Transaction”). While there could be merits to a Transaction, there is no
+        assurance that any such Transaction will be consummated, as a Transaction would be subject
+        to, among other things, the affirmative recommendation of the Special Committee and, if
+        agreed upon, any necessary shareholder approval.
+      </p>
+    </blockquote>
+    <p class="source">
+      <a href={tesla10q}>Tesla Form 10-Q, Item 5</a> · filed October 22, 2026
+    </p>
+    <p>SpaceX’s Form 10-Q, also filed October 22, 2026, says:</p>
+    <blockquote>
+      <p>
+        As announced on our earnings call on October 20, 2026, our board of directors has formed a
+        special committee to evaluate a potential combination between SpaceX and Tesla, Inc.
+        ("Tesla"). The board of directors of Tesla has also formed a special committee. No
+        determination by our special committee has been made regarding any potential combination,
+        and any potential combination would be subject to further approval by our special committee,
+        our board of directors and our controlling shareholder.
+      </p>
+    </blockquote>
+    <p class="source">
+      <a href={spacex10q}>SpaceX Form 10-Q</a> · filed October 22, 2026 · quarter ended September 30, 2026
+    </p>
+
+    <h2>What is not in those filings</h2>
+    <ul class="clean">
+      <li>No price, exchange ratio, or structure.</li>
+      <li>No names of the committee members, in the paragraphs quoted above.</li>
+      <li>No proxy, no record date, and no meeting date for a combination.</li>
+      <li>No statement of which vote — Texas default, charter, exchange rule, or something else — would apply.</li>
+    </ul>
+
+    <h2>The likely threshold</h2>
+    <p><span class="badge">Unconfirmed for this transaction</span></p>
+    <p>
+      Texas Business Organizations Code section 21.457 says that, except as the code or the
+      certificate of formation provides, approval of a fundamental business transaction takes the
+      affirmative vote of at least <strong>two-thirds of the outstanding shares</strong> entitled to
+      vote on it. Section 21.365 lets a certificate set a different portion, but not below a majority.
+    </p>
+    <p class="source">
+      <a href={tboc457}>TBOC § 21.457</a> ·
+      <a href={tboc365}>TBOC § 21.365</a>
+      · statute text as published by the Texas Legislature
+    </p>
+    <p>
+      The certificate of formation signed June 13, 2024, the day of the conversion to Texas, says
+      in section 4.3(a), subject to preferred-stock rights, the bylaws, and Article IX:
+    </p>
+    <blockquote>
+      <p>
+        the vote of shareholders holding a majority of the shares of stock entitled to vote on the
+        matter then outstanding shall be sufficient to approve, authorize, adopt, or to otherwise
+        cause the Corporation to take, or affirm the Corporation’s taking of, any action, including
+        any “fundamental business transaction” as defined in the TBOC.
+      </p>
+    </blockquote>
+    <p class="source">
+      <a href={charter}>Certificate of formation, Exhibit 3.1</a> · signed June 13, 2024
+    </p>
+    <p>
+      Article IX of that same certificate is narrower than a merger. It requires the affirmative
+      vote of at least 66 2/3% of the voting power of shares entitled to vote generally in director
+      elections in order to amend, or adopt something inconsistent with, Article V, Article VI,
+      Article VII, or Article IX. Those articles cover the board, who may amend the bylaws, meeting
+      mechanics, and the amendment rule itself. The November 6, 2025 proposal to eliminate
+      applicable supermajority requirements was not approved
+      ({supermajority2025.counts}).
+    </p>
+    <p class="source">
+      <a href={supermajority2025.href}>{supermajority2025.source}</a>
+    </p>
+    <div class="callout">
+      <p>
+        <strong>Do not treat the charter sentence as the rule for a deal that does not exist yet.</strong>
+      </p>
+      <p>
+        The form of any transaction is unknown. Preferred stock, a class vote, an exchange rule, or
+        a later charter amendment could change the math. The proxy for that meeting is the document
+        that states the standard. Until it is filed, the majority-of-outstanding reading is a
+        reading of the June 13, 2024 certificate, not a confirmed voting item.
+      </p>
+    </div>
+
+    <h2>Why abstentions and silence matter</h2>
+    <p>
+      On a “majority of the shares then outstanding” standard, the denominator is shares outstanding,
+      not shares that showed up. A yes vote is what counts toward the numerator. An abstention, a
+      broker non-vote, and a share that is never returned do not add a yes. For getting over that
+      line, they work like a no. They are not rewritten as “against” on the inspector’s sheet.
+    </p>
+    <p>
+      Broker non-votes are the column Tesla’s meeting 8-Ks use for shares a broker did not vote.
+      They are not yes votes in those tables.
+    </p>
+    <p>
+      Shares outstanding are a separate, dated figure. The September 30, 2026 balance sheet is
+      presented in millions and reports common stock of 3,953 and 3,751 shares issued and outstanding
+      as of September 30, 2026 and December 31, 2025. Par on that line is $4 million and $3 million.
+      At the certificate’s $0.001 par value, 3,953 million shares produce about $4 million of par,
+      which matches the line. This page reads the figure as <strong>3,953 million shares</strong>
+      outstanding as of September 30, 2026. It is not a record date for any combination vote.
+    </p>
+    <p class="source">
+      <a href={tesla10q}>Form 10-Q balance sheet</a> · as of September 30, 2026 ·
+      <a href={charter}>par value in the certificate</a>
+    </p>
+
+    <h2>The xAI lesson</h2>
+    <p>{xai.prose}</p>
+    <p>Certified counts: {xai.counts}</p>
+    <p class="source">
+      <a href={xai.href}>{xai.source}</a> · meeting {xai.meeting}
+    </p>
+    <p>
+      That proposal was advisory, and its counting rule was the bylaw standard the 8-K describes.
+      A combination, if one is proposed, may use a different standard. The useful point is narrower:
+      more yes votes than no votes is not always enough when abstentions count against the proposal,
+      or when the hurdle is a majority of every share outstanding.
+    </p>
+    <p>
+      <a class="button" href="/how-to-vote/">How a ballot actually gets cast</a>
+    </p>
+  </div>
+</Base>

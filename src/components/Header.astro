@@ -1,0 +1,39 @@
+---
+const path = Astro.url.pathname;
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/add-shares/", label: "Add shares" },
+  { href: "/the-vote/", label: "The vote" },
+  { href: "/holders/", label: "Holders" },
+  { href: "/voting-history/", label: "History" },
+  { href: "/sentiment/", label: "Sentiment" },
+  { href: "/methodology/", label: "Method" },
+  { href: "/about/", label: "About" },
+];
+---
+
+<header class="site-header">
+  <div class="wrap">
+    <div class="brand-row">
+      <a class="brand" href="/">
+        <svg viewBox="0 0 48 48" aria-hidden="true">
+          <rect x="4" y="7" width="40" height="34" rx="4" fill="#0c4f3c" />
+          <path d="M14 25.5 21 32.5 35 16.5" fill="none" stroke="#f4f0e6" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span>
+          <span class="brand-name">Every Share Votes</span>
+          <span class="brand-kicker">A TSLA holder’s guide</span>
+        </span>
+      </a>
+    </div>
+    <nav class="nav-scroll" aria-label="Primary">
+      {
+        links.map((link) => (
+          <a href={link.href} aria-current={path === link.href ? "page" : undefined}>
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>

@@ -2,6 +2,15 @@ export function formatInt(value: number): string {
   return new Intl.NumberFormat("en-US").format(value);
 }
 
+/** Share of a reported-share denominator. Not a percent of shares outstanding. */
+export function formatSharePct(shares: number, total: number): string {
+  if (!Number.isFinite(shares) || !Number.isFinite(total) || total <= 0) return "—";
+  if (shares === 0) return "0%";
+  const pct = (shares / total) * 100;
+  if (pct > 0 && pct < 0.01) return "<0.01%";
+  return `${pct.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}%`;
+}
+
 export function formatUsd(value: number): string {
   return new Intl.NumberFormat("en-US", {
     style: "currency",

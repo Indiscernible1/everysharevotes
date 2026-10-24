@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import { formatInt, formatPeriod, formatUsd } from "../lib/format";
+import { formatInt, formatPeriod, formatSharePct, formatUsd } from "../lib/format";
 import holdersFile from "../../public/data/holders.json";
 
 type Holder = {
@@ -29,8 +29,13 @@ type Doc = {
 
 const doc = holdersFile as Doc;
 const primary = doc.primaryReportPeriod;
+const periodShares = new Map<string, number>();
+for (const row of doc.holders) {
+  periodShares.set(row.reportPeriod, (periodShares.get(row.reportPeriod) ?? 0) + row.shares);
+}
 const preview = doc.holders.filter((row) => !primary || row.reportPeriod === primary).slice(0, 25);
 const primaryCount = doc.periods.find((period) => period.reportPeriod === primary)?.managers ?? 0;
+const primaryShares = primary ? periodShares.get(primary) ?? 0 : 0;
 const vanguardNames = new Set(
   doc.holders
     .filter((row) => row.reportPeriod === primary && /vanguard/i.test(row.filingManager))
@@ -42,14 +47,9 @@ const vanguardNames = new Set(
   title="Who holds TSLA"
   description="Sortable Form 13F holdings for CUSIP 88160R101, with each row linked to the EDGAR filing and the report period labeled."
 >
-  <div class="wrap" data-holders-app>
+  <div class="wrap holders-page" data-holders-app>
     <p class="eyebrow">Form 13F · CUSIP 88160R101</p>
     <h1>Who files a holding in TSLA.</h1>
-    <p class="lede prose">
-      Each row is one institutional manager’s Form 13F, not a person and not a retail account.
-      Parents and sub-advisers sometimes report the same shares. Adding the column will double-count.
-    </p>
-
     {
       doc.holders.length === 0 ? (
         <div class="callout">
@@ -59,14 +59,101 @@ const vanguardNames = new Set(
           <p>{doc.pending}</p>
         </div>
       ) : (
+        <p class="lede">
+          Each row is one 13F filing manager. % of reported 13F shares is that row’s shares divided by the sum of reported shares for the same period in this file, not a percent of shares outstanding.
+        </p>
+      )
+    }
+
+    <div class="controls">
+      <label class="field">
+        Search manager
+        <input id="holder-search" type="search" placeholder="Type a filing-manager name" autocomplete="off" />
+      </label>
+      <label class="field">
+        Report period
+        <select id="holder-period">
+          {
+            doc.periods.map((period) => (
+              <option value={period.reportPeriod} selected={period.reportPeriod === primary}>
+                {formatPeriod(period.reportPeriod)} ({formatInt(period.managers)})
+              </option>
+            ))
+          }
+          <option value="">All periods in this file</option>
+        </select>
+      </label>
+    </div>
+    <p id="holder-count" class="status" aria-live="polite">
+      {
+        doc.holders.length === 0
+          ? "No rows."
+          : `${formatInt(primaryCount)} filing managers · ${formatPeriod(primary)} · % of ${formatInt(primaryShares)} reported 13F shares in this file`
+      }
+    </p>
+    <div class="table-wrap">
+      <table>
+        <caption class="visually-hidden">
+          Institutional Form 13F positions in CUSIP 88160R101. The percent column is each manager’s shares divided by the sum of reported shares for the same report period in this file. Each source link is that manager’s EDGAR index.
+        </caption>
+        <thead>
+          <tr>
+            <th class="sticky-col" aria-sort="none"><button class="sort" type="button" data-sort="filingManager">Manager</button></th>
+            <th class="num" aria-sort="descending"><button class="sort" type="button" data-sort="shares">Shares</button></th>
+            <th class="num pct-col" aria-sort="none">
+              <button class="sort" type="button" data-sort="pct" title="That row’s shares divided by the sum of reported 13F shares for the same report period in this file. Not a percent of shares outstanding.">
+                % of reported 13F shares
+              </button>
+            </th>
+            <th class="num" aria-sort="none"><button class="sort" type="button" data-sort="valueUsd">Value</button></th>
+            <th>Voting authority</th>
+            <th aria-sort="none"><button class="sort" type="button" data-sort="reportPeriod">Report period</button></th>
+            <th aria-sort="none"><button class="sort" type="button" data-sort="filingDate">Filed</button></th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody id="holder-rows">
+          {
+            preview.map((row) => (
+              <tr>
+                <td class="sticky-col" data-label="Manager">
+                  {row.filingManager}
+                  {row.isAmendment ? " (amendment)" : ""}
+                </td>
+                <td class="num" data-label="Shares">{formatInt(row.shares)}</td>
+                <td class="num" data-label="% of reported 13F shares">{formatSharePct(row.shares, periodShares.get(row.reportPeriod) ?? 0)}</td>
+                <td class="num" data-label="Value reported">{formatUsd(row.valueUsd)}</td>
+                <td data-label="Voting authority">
+                  {formatInt(row.votingSole)} sole · {formatInt(row.votingShared)} shared · {formatInt(row.votingNone)} none
+                </td>
+                <td data-label="Report period">{formatPeriod(row.reportPeriod)}</td>
+                <td data-label="Filed">{row.filingDate}</td>
+                <td data-label="Filing">
+                  <a href={row.sourceUrl}>13F index</a>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+    <div id="holder-pager" class="pager"></div>
+    <p id="static-note" class="source">
+      Without JavaScript, this table is the 25 largest positions for the default report period. The
+      full file is <a href="/data/holders.json">holders.json</a>.
+    </p>
+
+    {
+      doc.holders.length > 0 && (
         <div class="prose">
+          <h2>How to read this file</h2>
           <p>
-            {formatInt(primaryCount)} filing managers report this CUSIP for the{" "}
-            {formatPeriod(primary)}. The file was built {doc.generatedAt} from{" "}
+            {formatInt(primaryCount)} filing managers report this CUSIP for the {formatPeriod(primary)}.
+            The file was built {doc.generatedAt} from{" "}
             <a href={doc.source.datasetUrl ?? doc.source.datasetPage}>{doc.source.datasetLabel}</a>.
             {" "}
-            {formatInt(doc.stats.optionRowsExcluded)} put or call rows were left out of the share
-            counts. Values are the dollar amounts in the SEC data set.
+            {formatInt(doc.stats.optionRowsExcluded)} put or call rows were left out of the share counts.
+            Values are the dollar amounts in the SEC data set.
           </p>
           <p class="source">
             Dataset index: <a href={doc.source.datasetPage}>SEC Form 13F data sets</a>
@@ -75,7 +162,10 @@ const vanguardNames = new Set(
             <br />
             {doc.method.included} {doc.method.amendments}
           </p>
-          <p>{doc.method.doubleCount} {doc.method.omitted}</p>
+          <p>
+            The percent column adds to 100% of the reported-share column for that period. {doc.method.doubleCount}{" "}
+            {doc.method.omitted} A search narrows the rows on screen and does not change the denominator.
+          </p>
           {
             vanguardNames.size > 1 && (
               <p>
@@ -85,15 +175,14 @@ const vanguardNames = new Set(
               </p>
             )
           }
+          <h2>Pass-through voting programs</h2>
+          <p>
+            Some managers let certain fund investors choose a voting policy. Eligibility is in the firm’s
+            own materials. A name match in the table is not a statement of how that manager voted.
+          </p>
         </div>
       )
     }
-
-    <h2>Pass-through voting programs</h2>
-    <p class="prose">
-      Some managers let certain fund investors choose a voting policy. Eligibility is in the firm’s
-      own materials. A name match in the table is not a statement of how that manager voted.
-    </p>
     <div class="grid-2">
       <article class="card">
         <h3>BlackRock Voting Choice</h3>
@@ -120,77 +209,63 @@ const vanguardNames = new Set(
         </p>
       </article>
     </div>
-
-    <h2>The filings</h2>
-    <div class="controls">
-      <label class="field">
-        Search manager
-        <input id="holder-search" type="search" placeholder="Type a filing-manager name" autocomplete="off" />
-      </label>
-      <label class="field">
-        Report period
-        <select id="holder-period">
-          {
-            doc.periods.map((period) => (
-              <option value={period.reportPeriod} selected={period.reportPeriod === primary}>
-                {formatPeriod(period.reportPeriod)} ({formatInt(period.managers)})
-              </option>
-            ))
-          }
-          <option value="">All periods in this file</option>
-        </select>
-      </label>
-    </div>
-    <p id="holder-count" class="status" aria-live="polite">
-      {doc.holders.length === 0 ? "No rows." : `Showing the first ${preview.length} managers for the default period until search is available.`}
-    </p>
-    <p id="static-note" class="source">
-      Without JavaScript, this table is the 25 largest positions for the default report period. The
-      full file is <a href="/data/holders.json">holders.json</a>.
-    </p>
-    <div class="table-wrap">
-      <table>
-        <caption class="visually-hidden">
-          Institutional Form 13F positions in CUSIP 88160R101. Each source link is that manager’s EDGAR index.
-        </caption>
-        <thead>
-          <tr>
-            <th class="sticky-col" aria-sort="none"><button class="sort" type="button" data-sort="filingManager">Manager</button></th>
-            <th class="num" aria-sort="descending"><button class="sort" type="button" data-sort="shares">Shares</button></th>
-            <th class="num" aria-sort="none"><button class="sort" type="button" data-sort="valueUsd">Value</button></th>
-            <th>Voting authority</th>
-            <th aria-sort="none"><button class="sort" type="button" data-sort="reportPeriod">Report period</button></th>
-            <th aria-sort="none"><button class="sort" type="button" data-sort="filingDate">Filed</button></th>
-            <th>Source</th>
-          </tr>
-        </thead>
-        <tbody id="holder-rows">
-          {
-            preview.map((row) => (
-              <tr>
-                <td class="sticky-col" data-label="Manager">
-                  {row.filingManager}
-                  {row.isAmendment ? " (amendment)" : ""}
-                </td>
-                <td class="num" data-label="Shares">{formatInt(row.shares)}</td>
-                <td class="num" data-label="Value reported">{formatUsd(row.valueUsd)}</td>
-                <td data-label="Voting authority">
-                  {formatInt(row.votingSole)} sole · {formatInt(row.votingShared)} shared · {formatInt(row.votingNone)} none
-                </td>
-                <td data-label="Report period">{formatPeriod(row.reportPeriod)}</td>
-                <td data-label="Filed">{row.filingDate}</td>
-                <td data-label="Filing">
-                  <a href={row.sourceUrl}>13F index</a>
-                </td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
-    </div>
-    <div id="holder-pager" class="pager"></div>
   </div>
 </Base>
+
+<style>
+  .holders-page {
+    margin-top: -0.6rem;
+  }
+
+  .holders-page h1 {
+    font-size: clamp(1.65rem, 2.8vw, 2.25rem);
+    margin: 0.15rem 0 0.35rem;
+  }
+
+  .holders-page .lede {
+    font-size: 1.02rem;
+    line-height: 1.4;
+    margin: 0 0 0.35rem;
+    max-width: 68rem;
+  }
+
+  .holders-page .controls {
+    margin: 0.25rem 0 0.15rem;
+  }
+
+  .holders-page input[type="search"],
+  .holders-page select {
+    min-height: 2.3rem;
+  }
+
+  .holders-page .status {
+    margin: 0.1rem 0 0.35rem;
+    font-size: 0.92rem;
+  }
+
+  .holders-page button.sort {
+    min-height: 0;
+    padding: 0.1rem 0.15rem;
+    border: 0;
+    background: transparent;
+    border-radius: 0.3rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    text-align: inherit;
+  }
+
+  .holders-page .pct-col {
+    width: 8.5rem;
+  }
+
+  .holders-page th,
+  .holders-page td {
+    padding: 0.45rem 0.45rem;
+  }
+</style>
 
 <script>
   import { mountHolders } from "../scripts/holders";

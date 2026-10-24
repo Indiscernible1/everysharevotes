@@ -1,4 +1,4 @@
-import { formatInt, formatPeriod, formatUsd } from "../lib/format";
+import { formatInt, formatPeriod, formatSharePct, formatUsd } from "../lib/format";
 
 type Holder = {
   filingManager: string;
@@ -30,7 +30,7 @@ const programs: { test: RegExp; name: string }[] = [
   { test: /state street|ssga/i, name: "State Street proxy voting choice" },
 ];
 
-type SortKey = "filingManager" | "shares" | "valueUsd" | "filingDate" | "reportPeriod";
+type SortKey = "filingManager" | "shares" | "pct" | "valueUsd" | "filingDate" | "reportPeriod";
 
 export function mountHolders(): void {
   const app = document.querySelector<HTMLElement>("[data-holders-app]");
@@ -49,6 +49,7 @@ export function mountHolders(): void {
 
   const pageSize = 50;
   let rows: Holder[] = [];
+  let periodShares = new Map<string, number>();
   let sortKey: SortKey = "shares";
   let sortDir: "asc" | "desc" = "desc";
   let page = 1;
@@ -60,6 +61,10 @@ export function mountHolders(): void {
     })
     .then((payload) => {
       rows = payload.holders ?? [];
+      periodShares = new Map();
+      for (const row of rows) {
+        periodShares.set(row.reportPeriod, (periodShares.get(row.reportPeriod) ?? 0) + row.shares);
+      }
       const staticNote = document.querySelector<HTMLElement>("#static-note");
       if (staticNote) staticNote.hidden = true;
       render();
@@ -99,10 +104,20 @@ export function mountHolders(): void {
     });
   }
 
+  function sortValue(row: Holder): string | number {
+    if (sortKey === "pct") return pctOf(row);
+    return row[sortKey];
+  }
+
+  function pctOf(row: Holder): number {
+    const total = periodShares.get(row.reportPeriod) ?? 0;
+    return total > 0 ? row.shares / total : 0;
+  }
+
   function render(): void {
     const list = filtered().sort((a, b) => {
-      const left = a[sortKey];
-      const right = b[sortKey];
+      const left = sortValue(a);
+      const right = sortValue(b);
       let order = 0;
       if (typeof left === "number" && typeof right === "number") order = left - right;
       else order = String(left).localeCompare(String(right));
@@ -111,12 +126,19 @@ export function mountHolders(): void {
     const pages = Math.max(1, Math.ceil(list.length / pageSize));
     page = Math.min(page, pages);
     const slice = list.slice((page - 1) * pageSize, page * pageSize);
-    const periodLabel = periodEl.selectedOptions[0]?.textContent ?? "All report periods";
-    countEl.textContent = `${formatInt(list.length)} filing managers · ${periodLabel}`;
+    const selected = periodEl.value;
+    const periodLabel = selected ? formatPeriod(selected) : "All periods in this file";
+    const denom = selected ? periodShares.get(selected) ?? 0 : 0;
+    const denomText = selected
+      ? ` · % of ${formatInt(denom)} reported 13F shares in this file`
+      : " · % uses each row’s own report-period total in this file";
+    countEl.textContent = `${formatInt(list.length)} filing managers · ${periodLabel}${denomText}`;
     bodyEl.replaceChildren(...slice.map(rowView));
     document.querySelectorAll<HTMLButtonElement>("[data-sort]").forEach((button) => {
       const active = button.dataset.sort === sortKey;
-      button.setAttribute("aria-sort", active ? (sortDir === "asc" ? "ascending" : "descending") : "none");
+      const state = active ? (sortDir === "asc" ? "ascending" : "descending") : "none";
+      button.setAttribute("aria-sort", state);
+      button.closest("th")?.setAttribute("aria-sort", state);
     });
     renderPager(pages);
   }
@@ -155,6 +177,7 @@ export function mountHolders(): void {
         true,
       ),
       cell(formatInt(row.shares), "Shares", false, true),
+      cell(formatSharePct(row.shares, periodShares.get(row.reportPeriod) ?? 0), "% of reported 13F shares", false, true),
       cell(formatUsd(row.valueUsd), "Value reported", false, true),
       cell(
         `${formatInt(row.votingSole)} sole · ${formatInt(row.votingShared)} shared · ${formatInt(row.votingNone)} none`,

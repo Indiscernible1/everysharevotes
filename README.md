@@ -56,7 +56,7 @@ The dev server is Astro. The ledger is a Cloudflare Pages Function, so `npm run 
 cp .dev.vars.example .dev.vars
 # Put a real salt in IP_HASH_SALT. The example Turnstile secret is Cloudflare's test secret.
 npm run build
-npx wrangler d1 migrations apply everysharevotes-sentiment --local
+npx wrangler d1 migrations apply everysharevotes --local
 npx wrangler pages dev dist --port 8788 --ip 127.0.0.1
 ```
 
@@ -86,30 +86,24 @@ The domain everysharevotes.com is already on Cloudflare. In the Pages project:
 
 ### D1 binding
 
-The ledger reads and writes a D1 database. The binding name has to be `DB`.
-
-```bash
-npx wrangler d1 create everysharevotes-sentiment
-```
-
-Copy the database id into `wrangler.toml`, replacing the all-zero placeholder:
+The ledger reads and writes the D1 database named `everysharevotes`. The binding name is `DB`. `wrangler.toml` already has that name and the database id `971cef78-6622-4328-9f60-1f95f74d445d`.
 
 ```toml
 [[d1_databases]]
 binding = "DB"
-database_name = "everysharevotes-sentiment"
-database_id = "<id from wrangler d1 create>"
+database_name = "everysharevotes"
+database_id = "971cef78-6622-4328-9f60-1f95f74d445d"
 ```
 
-Apply both migrations to the remote database:
+Apply both migrations to the remote database (or paste them, in this order, into the D1 console):
 
 ```bash
-npx wrangler d1 migrations apply everysharevotes-sentiment --remote
+npx wrangler d1 migrations apply everysharevotes --remote
 ```
 
 `migrations/0001_sentiment.sql` is the retired one-browser poll. `migrations/0002_share_ledger.sql` is the share ledger. Apply both. The old `/api/sentiment` route is still in the repo and is not linked from the pages.
 
-In the Pages project settings, bind the same D1 database to production and preview as the variable name `DB`. A dashboard binding is what the deployed function sees. The placeholder id in `wrangler.toml` is for local `wrangler pages dev` only and must be replaced before you rely on Wrangler to attach production.
+In the Pages project settings, bind the same D1 database to production and preview as the variable name `DB`. A dashboard binding is what the deployed function sees. The `database_id` in `wrangler.toml` is the production id, so a Pages deploy can attach this database.
 
 Set these Pages secrets (production and preview):
 

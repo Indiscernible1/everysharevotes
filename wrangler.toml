@@ -1,12 +1,11 @@
-# Cloudflare Pages + D1 binding for the unscientific sentiment poll.
-# Replace database_id after: npx wrangler d1 create everysharevotes-sentiment
-# The placeholder below lets `wrangler pages dev` run locally. Production
-# deploys must use the real id from the Cloudflare dashboard or wrangler.
+# Cloudflare Pages + D1 binding for the share ledger.
+# Production database: everysharevotes
+# id 971cef78-6622-4328-9f60-1f95f74d445d
 name = "everysharevotes"
 compatibility_date = "2026-10-01"
 pages_build_output_dir = "dist"
 
 [[d1_databases]]
 binding = "DB"
-database_name = "everysharevotes-sentiment"
-database_id = "00000000-0000-0000-0000-000000000000"
+database_name = "everysharevotes"
+database_id = "971cef78-6622-4328-9f60-1f95f74d445d"

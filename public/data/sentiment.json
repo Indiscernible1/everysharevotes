@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-24T02:53:48.452062+00:00",
+  "generatedAt": "2026-10-24T17:23:05.312364+00:00",
   "media": {
     "method": "none",
     "query": "\"Tesla\" \"SpaceX\" merger",
@@ -734,7 +734,7 @@
         },
         {
           "date": "2026-10-24",
-          "yes": 0.195
+          "yes": 0.185
         }
       ],
       "note": "One UTC-day snapshot, the last YES price returned for that day. No days were filled in."
@@ -744,62 +744,62 @@
         "venue": "Polymarket",
         "question": "Tesla and SpaceX merger officially announced by December 31?",
         "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-december-31",
-        "yes": 0.195,
-        "asOf": "2026-10-24T02:53:48.452062+00:00",
+        "yes": 0.165,
+        "asOf": "2026-10-24T17:23:05.312364+00:00",
         "inChart": true,
         "note": "Charted YES price."
       },
       {
         "venue": "Polymarket",
         "question": "Tesla and SpaceX merger officially announced by September 30?",
-        "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30",
+        "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-september-30",
         "yes": 0.0,
-        "asOf": "2026-10-24T02:53:48.452062+00:00",
+        "asOf": "2026-10-24T17:23:05.312364+00:00",
         "inChart": false,
         "note": "Different deadline. Not included in the chart line."
       },
       {
         "venue": "Polymarket",
         "question": "Tesla and SpaceX merger officially announced by January 31, 2027?",
-        "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30",
-        "yes": 0.295,
-        "asOf": "2026-10-24T02:53:48.452062+00:00",
+        "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-january-31-2027",
+        "yes": 0.23,
+        "asOf": "2026-10-24T17:23:05.312364+00:00",
         "inChart": false,
         "note": "Different deadline. Not included in the chart line."
       },
       {
         "venue": "Polymarket",
         "question": "Tesla and SpaceX merger officially announced by December 31, 2027?",
-        "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30",
+        "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-december-31-2027",
         "yes": 0.655,
-        "asOf": "2026-10-24T02:53:48.452062+00:00",
+        "asOf": "2026-10-24T17:23:05.312364+00:00",
         "inChart": false,
         "note": "Different deadline. Not included in the chart line."
       },
       {
         "venue": "Polymarket",
         "question": "Tesla and SpaceX merger officially announced by February 28, 2027?",
-        "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30",
-        "yes": 0.345,
-        "asOf": "2026-10-24T02:53:48.452062+00:00",
+        "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-february-28-2027",
+        "yes": 0.3,
+        "asOf": "2026-10-24T17:23:05.312364+00:00",
         "inChart": false,
         "note": "Different deadline. Not included in the chart line."
       },
       {
         "venue": "Polymarket",
         "question": "Tesla and SpaceX merger officially announced by June 30, 2027?",
-        "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30",
+        "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-june-30-2027",
         "yes": 0.595,
-        "asOf": "2026-10-24T02:53:48.452062+00:00",
+        "asOf": "2026-10-24T17:23:05.312364+00:00",
         "inChart": false,
         "note": "Different deadline. Not included in the chart line."
       },
       {
         "venue": "Polymarket",
         "question": "Tesla and SpaceX merger officially announced by June 30?",
-        "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30",
+        "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-june-30",
         "yes": 0.0,
-        "asOf": "2026-10-24T02:53:48.452062+00:00",
+        "asOf": "2026-10-24T17:23:05.312364+00:00",
         "inChart": false,
         "note": "Different deadline. Not included in the chart line."
       },
@@ -808,7 +808,7 @@
         "question": "Will Tesla and SpaceX officially announce a merger, or a formal merger process, by December 31, 2026?",
         "url": "https://manifold.markets/BarryJones/will-tesla-and-spacex-officially-an",
         "yes": 0.799999999999999,
-        "asOf": "2026-10-24T02:53:48.452062+00:00",
+        "asOf": "2026-10-24T17:23:05.312364+00:00",
         "inChart": false,
         "historyPoints": 0,
         "note": "Stored as its own question. Not averaged with Polymarket."
@@ -818,7 +818,7 @@
         "question": "SpaceX & Tesla Merger before 2028",
         "url": "https://manifold.markets/Babawagen/spacex-tesla-merger-before-2028",
         "yes": 0.6899999999999998,
-        "asOf": "2026-10-24T02:53:48.452062+00:00",
+        "asOf": "2026-10-24T17:23:05.312364+00:00",
         "inChart": false,
         "historyPoints": 0,
         "note": "Stored as its own question. Not averaged with Polymarket."
@@ -828,7 +828,7 @@
         "question": "Will SpaceX combine with Tesla in 2026?",
         "url": "https://manifold.markets/ac/will-spacex-combine-with-tesla-in-2",
         "yes": 0.009999999999999978,
-        "asOf": "2026-10-24T02:53:48.452062+00:00",
+        "asOf": "2026-10-24T17:23:05.312364+00:00",
         "inChart": false,
         "historyPoints": 0,
         "note": "Stored as its own question. Not averaged with Polymarket."
@@ -837,7 +837,7 @@
         "venue": "Kalshi",
         "question": null,
         "status": "no-market",
-        "asOf": "2026-10-24T02:54:27.996277+00:00",
+        "asOf": "2026-10-24T17:23:44.013732+00:00",
         "inChart": false,
         "matches": [],
         "note": "No open Kalshi market matching SpaceX and a Tesla combination was in the queried pages."
@@ -845,7 +845,7 @@
     ],
     "manifoldHistory": [],
     "kalshi": {
-      "checkedAt": "2026-10-24T02:54:27.996277+00:00",
+      "checkedAt": "2026-10-24T17:23:44.013732+00:00",
       "queries": [
         {
           "url": "https://api.elections.kalshi.com/trade-api/v2/events?limit=200&status=open&with_nested_markets=true",

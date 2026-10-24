@@ -10,7 +10,10 @@
     "preview": "astro preview --host 0.0.0.0 --port 4321",
     "check": "astro check",
     "test:13f": "python3 scripts/test_thirteen_f.py",
-    "fetch:13f": "python3 scripts/fetch_13f.py"
+    "test:npx": "python3 scripts/test_npx.py",
+    "fetch:13f": "python3 scripts/fetch_13f.py",
+    "fetch:sentiment": "python3 scripts/fetch_sentiment.py",
+    "fetch:npx": "python3 scripts/fetch_npx.py"
   },
   "engines": {
     "node": ">=20"

@@ -550,6 +550,132 @@ button[type="submit"],
   min-height: 1.4rem;
 }
 
+.scoreboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+  margin-top: 1.4rem;
+}
+
+.score {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 1.1rem;
+  box-shadow: var(--shadow);
+  padding: 1rem 1.1rem 1.15rem;
+}
+
+.score.for {
+  border-top: 7px solid var(--green);
+}
+
+.score.against {
+  border-top: 7px solid var(--copper);
+}
+
+.score strong {
+  display: block;
+  margin: 0.15rem 0;
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 7vw, 4.6rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  font-variant-numeric: tabular-nums;
+}
+
+.score span,
+.score-meta {
+  color: var(--muted);
+}
+
+.score-meta {
+  font-size: 1.05rem;
+  margin: 0.8rem 0 0.2rem;
+}
+
+.chart-card,
+.share-form,
+.chart {
+  margin-top: 1.2rem;
+}
+
+.chart-card,
+.share-form {
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 1.1rem;
+  box-shadow: var(--shadow);
+  padding: 1rem 1.05rem 1.15rem;
+}
+
+.chart svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.chart .grid {
+  stroke: #e4ddd0;
+  stroke-width: 1;
+}
+
+.chart .axis {
+  fill: var(--muted);
+  font-size: 11px;
+  font-family: var(--sans);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin: 0.6rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.legend i {
+  display: inline-block;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 999px;
+  margin-right: 0.35rem;
+}
+
+.jump {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.9rem;
+  margin-top: 1.4rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr;
+  gap: 0.7rem;
+  margin: 0.8rem 0;
+}
+
+.share-form input[type="number"] {
+  min-height: 2.8rem;
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 0.7rem;
+  padding: 0.4rem 0.7rem;
+  width: 100%;
+}
+
+.share-form select {
+  width: 100%;
+}
+
+#turnstile {
+  margin: 0.6rem 0 0.8rem;
+}
+
 @media (max-width: 800px) {
   body {
     background:
@@ -560,7 +686,8 @@ button[type="submit"],
 
   .docket,
   .split,
-  .grid-2 {
+  .grid-2,
+  .form-row {
     grid-template-columns: 1fr;
   }
 

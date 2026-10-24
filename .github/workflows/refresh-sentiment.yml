@@ -1,0 +1,56 @@
+name: Refresh sentiment series
+
+on:
+  schedule:
+    # Daily 14:10 UTC, after the US morning and clear of the Monday 13F job.
+    - cron: "10 14 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: refresh-sentiment
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch market and headline series
+        run: python3 scripts/fetch_sentiment.py
+
+      - name: Open a pull request when the series changes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- public/data/sentiment.json; then
+            echo "Sentiment JSON is unchanged."
+            exit 0
+          fi
+          branch="data/sentiment-$(date -u +%Y%m%d)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$branch"
+          git add public/data/sentiment.json
+          git commit -m "Update prediction-market and headline series"
+          git push --force-with-lease -u origin "$branch"
+          existing="$(gh pr list --head "$branch" --base main --json number --jq '.[0].number')"
+          if [ -n "$existing" ]; then
+            echo "Updated existing pull request #$existing"
+            exit 0
+          fi
+          gh pr create \
+            --base main \
+            --head "$branch" \
+            --title "Update sentiment series" \
+            --body "Daily fetch of the Polymarket YES history for the December 31 announcement market, plus the GDELT headline score when that API returns rows. scripts/fetch_sentiment.py does not invent missing days. Kalshi stays “No market yet” when the search finds nothing."

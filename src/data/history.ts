@@ -18,9 +18,13 @@ export type Meeting = {
 export const meetings: Meeting[] = [
   { id: "solarcity", name: "SolarCity acquisition", date: "2016-11-17" },
   { id: "pay2018", name: "2018 CEO performance award", date: "2018-03-21" },
+  { id: "directors2024", name: "2024 director elections", date: "2024-06-13" },
   { id: "ratify2024", name: "2024 ratification of the 2018 award", date: "2024-06-13" },
   { id: "texas2024", name: "2024 move to Texas", date: "2024-06-13" },
+  { id: "directors2025", name: "2025 director elections", date: "2025-11-06" },
   { id: "pay2025", name: "2025 CEO performance award", date: "2025-11-06" },
+  { id: "xai2025", name: "2025 xAI investment proposal", date: "2025-11-06" },
+  { id: "supermajority2025", name: "2025 supermajority elimination", date: "2025-11-06" },
 ];
 
 const notFound: HistoryCell = { status: "not-found" };
@@ -39,6 +43,10 @@ const teslaGlLetter =
   "https://www.sec.gov/Archives/edgar/data/1318605/000110465924066122/tm2413800d12_defa14a.htm";
 const reuters2025 =
   "https://www.reuters.com/sustainability/boards-policy-regulation/proxy-firm-glass-lewis-joins-iss-urging-vote-against-musks-1-trillion-pay-2025-10-20/";
+const cnbcIss2025 =
+  "https://www.cnbc.com/2025/10/17/proxy-advisor-iss-opposes-tesla-ceo-elon-musk-1-trillion-pay-plan.html";
+const teslaAdvisorLetter =
+  "https://www.sec.gov/Archives/edgar/data/1318605/000110465925101278/tm252289d39_defa14a.htm";
 
 export const recommendationRows: {
   name: string;
@@ -90,6 +98,24 @@ export const recommendationRows: {
         source: "Reuters",
         asOf: "October 20, 2025",
       },
+      directors2025: {
+        status: "found",
+        label: "Against Ira Ehrenpreis",
+        detail:
+          "CNBC reported that ISS recommended against reinstating director Ira Ehrenpreis. That article does not state ISS’s recommendation on Joe Gebbia or Kathleen Wilson-Thompson.",
+        href: cnbcIss2025,
+        source: "CNBC",
+        asOf: "October 17, 2025",
+      },
+      xai2025: {
+        status: "found",
+        label: "Against",
+        detail:
+          "CNBC reported that ISS recommended voting against giving the board authorization to invest in xAI.",
+        href: cnbcIss2025,
+        source: "CNBC",
+        asOf: "October 17, 2025",
+      },
     },
   },
   {
@@ -130,32 +156,24 @@ export const recommendationRows: {
         source: "Reuters",
         asOf: "October 20, 2025",
       },
+      directors2025: {
+        status: "found",
+        label: "Against Ira and Kathleen",
+        detail:
+          "Tesla’s shareholder letter filed as additional proxy material says Glass Lewis recommended against Ira Ehrenpreis and Kathleen Wilson-Thompson. The letter does not, in that passage, state a Glass Lewis line on Joe Gebbia.",
+        href: teslaAdvisorLetter,
+        source: "Tesla DEFA14A",
+        asOf: "October 21, 2025",
+      },
     },
   },
 ];
 
-export const holderRows: { name: string; note: string; cells: Record<string, HistoryCell> }[] = [
-  "BlackRock",
-  "Vanguard",
-  "State Street",
-  "FMR (Fidelity)",
-  "Geode Capital Management",
-  "Capital Group",
-].map((name) => ({
-  name,
-  note: "Institutional share votes, which would ordinarily be in Form N-PX or a press report of that filing.",
-  cells: {
-    solarcity: notFound,
-    pay2018: notFound,
-    ratify2024: notFound,
-    texas2024: notFound,
-    pay2025: notFound,
-  },
-}));
-
 export const extraSources = {
   cnbcIss2024,
   teslaGlLetter,
+  cnbcIss2025,
+  teslaAdvisorLetter,
 };
 
 export const outcomes = [
@@ -211,6 +229,28 @@ export const outcomes = [
     counts:
       "1,892,235,822 for; 564,940,908 against; 12,227,846 abstained; 302,456,274 broker non-votes.",
     note: "The 8-K says the proposal was approved. This page does not calculate a percentage from those counts.",
+    href: "https://www.sec.gov/Archives/edgar/data/1318605/000110465925108507/0001104659-25-108507.txt",
+    source: "Tesla 8-K reporting the November 6, 2025 annual meeting",
+  },
+  {
+    id: "xai2025",
+    name: "2025 xAI investment proposal",
+    meeting: "November 6, 2025",
+    result: "Not approved",
+    counts:
+      "1,058,999,435 for; 916,321,296 against; 473,073,200 abstained; 302,456,274 broker non-votes.",
+    note: "The 8-K says more votes were cast for than against, and the proposal was not approved because the bylaws generally treat abstentions as votes against.",
+    href: "https://www.sec.gov/Archives/edgar/data/1318605/000110465925108507/0001104659-25-108507.txt",
+    source: "Tesla 8-K reporting the November 6, 2025 annual meeting",
+  },
+  {
+    id: "supermajority2025",
+    name: "2025 supermajority elimination",
+    meeting: "November 6, 2025",
+    result: "Not approved",
+    counts:
+      "1,309,549,644 for; 955,682,310 against; 181,764,443 abstained; 302,456,274 broker non-votes.",
+    note: "Management proposal to eliminate applicable supermajority voting requirements. This page does not calculate a percentage from those counts.",
     href: "https://www.sec.gov/Archives/edgar/data/1318605/000110465925108507/0001104659-25-108507.txt",
     source: "Tesla 8-K reporting the November 6, 2025 annual meeting",
   },

@@ -1,0 +1,828 @@
+{
+  "generatedAt": "2026-10-24T03:07:26.523494+00:00",
+  "cusip": "88160R101",
+  "search": {
+    "endpoint": "https://efts.sec.gov/LATEST/search-index",
+    "query": "\"88160R101\"",
+    "forms": "N-PX",
+    "filedFrom": "2024-07-01",
+    "filedThrough": "2026-10-24",
+    "periods": [
+      "2024-06-30",
+      "2026-06-30"
+    ],
+    "totalHits": 4158,
+    "pages": 42,
+    "familyPeriodHits": 246,
+    "filingsDownloaded": 183
+  },
+  "olderTextSearch": {
+    "status": 200,
+    "query": "Tesla forms=N-PX filed 2016-01-01 through 2024-06-30, first 100 hits",
+    "totalHits": 2319,
+    "familyHitsOnFirstPage": [
+      {
+        "family": "Vanguard",
+        "filer": "VANGUARD WHITEHALL FUNDS  (CIK 0001004655)",
+        "adsh": "0001104659-23-095626",
+        "fileDate": "2023-08-28",
+        "period": "2023-06-30",
+        "index": "https://www.sec.gov/Archives/edgar/data/1004655/000110465923095626/0001104659-23-095626-index.html"
+      }
+    ],
+    "note": "The first page is a sample, not a parse of every pre-2024 text filing. Cells for 2016 and 2018 stay Not found unless a row was actually read."
+  },
+  "errors": [],
+  "families": [
+    {
+      "id": "blackrock",
+      "name": "BlackRock / iShares",
+      "note": "Form N-PX. 36 latest filing(s) for the periods ended June 30, 2024 and June 30, 2026 matched this family and CUSIP 88160R101.",
+      "filingCount": 36,
+      "parsedRows": 978,
+      "cells": {
+        "solarcity": {
+          "status": "not-found",
+          "note": "No parsed N-PX row for this item in the family filings selected for the periods ended June 30, 2024 and June 30, 2026. The 2016 and 2018 meetings predate the XML N-PX format and were not parsed from text filings."
+        },
+        "pay2018": {
+          "status": "not-found",
+          "note": "No parsed N-PX row for this item in the family filings selected for the periods ended June 30, 2024 and June 30, 2026. The 2016 and 2018 meetings predate the XML N-PX format and were not parsed from text filings."
+        },
+        "ratify2024": {
+          "status": "found",
+          "label": "For",
+          "detail": "For across 12 filing links. Shares in the parsed rows: For 1,416,139. Filing description: A Tesla proposal to ratify the 100% performance-based stock option award to Elon Musk that was proposed to and approved by our stockholders in 2018.",
+          "href": "https://www.sec.gov/Archives/edgar/data/1100663/000102140824004998/0001021408-24-004998-index.html",
+          "source": "iSHARES TRUST  (CIK 0001100663) Form N-PX",
+          "asOf": "2024-08-27"
+        },
+        "texas2024": {
+          "status": "found",
+          "label": "For",
+          "detail": "For across 12 filing links. Shares in the parsed rows: For 1,416,139. Filing description: A Tesla proposal to approve the redomestication of Tesla from Delaware to Texas by conversion.",
+          "href": "https://www.sec.gov/Archives/edgar/data/1100663/000102140824004998/0001021408-24-004998-index.html",
+          "source": "iSHARES TRUST  (CIK 0001100663) Form N-PX",
+          "asOf": "2024-08-27"
+        },
+        "directors2024": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 12 filing links. Shares in the parsed rows: For 2,832,278; Against 1,416,139. Filing description: Election of Class II Directors to serve for a three-year term expiring in 2027: James Murdoch",
+          "href": "https://www.sec.gov/Archives/edgar/data/1100663/000102140824004998/0001021408-24-004998-index.html",
+          "source": "iSHARES TRUST  (CIK 0001100663) Form N-PX",
+          "asOf": "2024-08-27"
+        },
+        "xai2025": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 18 filing links. Shares in the parsed rows: Against 3,969,709; Abstain 397,915. 1 row had a vote direction without a numeric share count and is not in the share sum. Filing description: A shareholder proposal regarding Board authorization of an investment in xAl.",
+          "href": "https://www.sec.gov/Archives/edgar/data/1761055/000143893426002298/0001438934-26-002298-index.html",
+          "source": "BlackRock ETF Trust  (CIK 0001761055) Form N-PX",
+          "asOf": "2026-08-28"
+        },
+        "pay2025": {
+          "status": "found",
+          "label": "For",
+          "detail": "For across 18 filing links. Shares in the parsed rows: For 4,367,624. 1 row had a vote direction without a numeric share count and is not in the share sum. Filing description: A Tesla proposal for approval of the 2025 CEO Performance Award.",
+          "href": "https://www.sec.gov/Archives/edgar/data/1761055/000143893426002298/0001438934-26-002298-index.html",
+          "source": "BlackRock ETF Trust  (CIK 0001761055) Form N-PX",
+          "asOf": "2026-08-28"
+        },
+        "directors2025": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 18 filing links. Shares in the parsed rows: For 7,803,791; Against 9,666,705. 4 rows had a vote direction without a numeric share count and are not in the share sum. Filing description: A Tesla proposal to elect three Class III directors to serve for a term of three years, or until their respective successors are duly elected and qualified. Ira Ehrenpreis",
+          "href": "https://www.sec.gov/Archives/edgar/data/1761055/000143893426002298/0001438934-26-002298-index.html",
+          "source": "BlackRock ETF Trust  (CIK 0001761055) Form N-PX",
+          "asOf": "2026-08-28"
+        },
+        "supermajority2025": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 18 filing links. Shares in the parsed rows: For 3,076,470; Against 1,291,154. 1 row had a vote direction without a numeric share count and is not in the share sum. Filing description: A Tesla proposal for adoption of amendments to certificate of formation and bylaws to eliminate applicable supermajority voting requirements.",
+          "href": "https://www.sec.gov/Archives/edgar/data/1761055/000143893426002298/0001438934-26-002298-index.html",
+          "source": "BlackRock ETF Trust  (CIK 0001761055) Form N-PX",
+          "asOf": "2026-08-28"
+        }
+      }
+    },
+    {
+      "id": "vanguard",
+      "name": "Vanguard",
+      "note": "Form N-PX. 37 latest filing(s) for the periods ended June 30, 2024 and June 30, 2026 matched this family and CUSIP 88160R101.",
+      "filingCount": 37,
+      "parsedRows": 773,
+      "cells": {
+        "solarcity": {
+          "status": "not-found",
+          "note": "No parsed N-PX row for this item in the family filings selected for the periods ended June 30, 2024 and June 30, 2026. The 2016 and 2018 meetings predate the XML N-PX format and were not parsed from text filings."
+        },
+        "pay2018": {
+          "status": "not-found",
+          "note": "No parsed N-PX row for this item in the family filings selected for the periods ended June 30, 2024 and June 30, 2026. The 2016 and 2018 meetings predate the XML N-PX format and were not parsed from text filings."
+        },
+        "ratify2024": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 13 filing links. Shares in the parsed rows: For 102,133,217.404; Against 433,484.016. 1 row had a vote direction without a numeric share count and is not in the share sum. Filing description: A Tesla proposal to ratify the 100% performance-based stock option award to Elon Musk that was proposed to and approved by our stockholders in 2018.",
+          "href": "https://www.sec.gov/Archives/edgar/data/36405/000110465924094540/0001104659-24-094540-index.html",
+          "source": "VANGUARD INDEX FUNDS  (CIK 0000036405) Form N-PX",
+          "asOf": "2024-08-29"
+        },
+        "texas2024": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 13 filing links. Shares in the parsed rows: For 102,564,117.404; Against 2,584.016. 1 row had a vote direction without a numeric share count and is not in the share sum. Filing description: A Tesla proposal to approve the redomestication of Tesla from Delaware to Texas by conversion.",
+          "href": "https://www.sec.gov/Archives/edgar/data/36405/000110465924094540/0001104659-24-094540-index.html",
+          "source": "VANGUARD INDEX FUNDS  (CIK 0000036405) Form N-PX",
+          "asOf": "2024-08-29"
+        },
+        "directors2024": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 13 filing links. Shares in the parsed rows: For 299,904,437.206; Against 7,795,667.055. 3 rows had a vote direction without a numeric share count and are not in the share sum. Filing description: Election of Class II Directors to serve for a three-year term expiring in 2027: James Murdoch",
+          "href": "https://www.sec.gov/Archives/edgar/data/36405/000110465924094540/0001104659-24-094540-index.html",
+          "source": "VANGUARD INDEX FUNDS  (CIK 0000036405) Form N-PX",
+          "asOf": "2024-08-29"
+        },
+        "xai2025": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 13 filing links. Shares in the parsed rows: For 303; Against 5,356,531.014; Abstain 93,968,175.688. Filing description: A shareholder proposal regarding Board authorization of an investment in xAI.",
+          "href": "https://www.sec.gov/Archives/edgar/data/36405/000110465926101997/0001104659-26-101997-index.html",
+          "source": "VANGUARD INDEX FUNDS  (CIK 0000036405) Form N-PX",
+          "asOf": "2026-08-27"
+        },
+        "pay2025": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 13 filing links. Shares in the parsed rows: For 98,845,381.772; Against 479,622.93; Abstain 3. 1 row had a vote direction without a numeric share count and is not in the share sum. Filing description: A Tesla proposal for approval of the 2025 CEO Performance Award.",
+          "href": "https://www.sec.gov/Archives/edgar/data/36405/000110465926101997/0001104659-26-101997-index.html",
+          "source": "VANGUARD INDEX FUNDS  (CIK 0000036405) Form N-PX",
+          "asOf": "2026-08-27"
+        },
+        "directors2025": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 13 filing links. Shares in the parsed rows: For 391,689,087.878; Against 5,610,923.93; Abstain 22. 4 rows had a vote direction without a numeric share count and are not in the share sum. Filing description: A Tesla proposal to elect Class III Director to serve for a term of three years, or until their respective successors are duly elected and qualified: Ira Ehrenpreis",
+          "href": "https://www.sec.gov/Archives/edgar/data/36405/000110465926101997/0001104659-26-101997-index.html",
+          "source": "VANGUARD INDEX FUNDS  (CIK 0000036405) Form N-PX",
+          "asOf": "2026-08-27"
+        },
+        "supermajority2025": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 13 filing links. Shares in the parsed rows: For 99,297,410.562; Against 222; Abstain 27,375.14. Filing description: A Tesla proposal for adoption of amendments to certificate of formation and bylaws to eliminate applicable supermajority voting requirements.",
+          "href": "https://www.sec.gov/Archives/edgar/data/36405/000110465926101997/0001104659-26-101997-index.html",
+          "source": "VANGUARD INDEX FUNDS  (CIK 0000036405) Form N-PX",
+          "asOf": "2026-08-27"
+        }
+      }
+    },
+    {
+      "id": "statestreet",
+      "name": "State Street / SPDR",
+      "note": "Form N-PX. 35 latest filing(s) for the periods ended June 30, 2024 and June 30, 2026 matched this family and CUSIP 88160R101.",
+      "filingCount": 35,
+      "parsedRows": 686,
+      "cells": {
+        "solarcity": {
+          "status": "not-found",
+          "note": "No parsed N-PX row for this item in the family filings selected for the periods ended June 30, 2024 and June 30, 2026. The 2016 and 2018 meetings predate the XML N-PX format and were not parsed from text filings."
+        },
+        "pay2018": {
+          "status": "not-found",
+          "note": "No parsed N-PX row for this item in the family filings selected for the periods ended June 30, 2024 and June 30, 2026. The 2016 and 2018 meetings predate the XML N-PX format and were not parsed from text filings."
+        },
+        "ratify2024": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 7 filing links. Shares in the parsed rows: For 30,590.951; Against 20,764,403.049. Filing description: A Tesla proposal to ratify the 100% performance-based stock option award to Elon Musk that was proposed to and approved by our stockholders in 2018.",
+          "href": "https://www.sec.gov/Archives/edgar/data/1064641/000102140824006694/0001021408-24-006694-index.html",
+          "source": "SELECT SECTOR SPDR TRUST  (CIK 0001064641) Form N-PX",
+          "asOf": "2024-08-30"
+        },
+        "texas2024": {
+          "status": "found",
+          "label": "For",
+          "detail": "For across 7 filing links. Shares in the parsed rows: For 20,794,994. Filing description: A Tesla proposal to approve the redomestication of Tesla from Delaware to Texas by conversion.",
+          "href": "https://www.sec.gov/Archives/edgar/data/1064641/000102140824006694/0001021408-24-006694-index.html",
+          "source": "SELECT SECTOR SPDR TRUST  (CIK 0001064641) Form N-PX",
+          "asOf": "2024-08-30"
+        },
+        "directors2024": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 7 filing links. Shares in the parsed rows: For 20,848,195.035; Against 41,536,786.965. Filing description: Election of Class II Directors to serve for a three-year term expiring in 2027: James Murdoch",
+          "href": "https://www.sec.gov/Archives/edgar/data/1064641/000102140824006694/0001021408-24-006694-index.html",
+          "source": "SELECT SECTOR SPDR TRUST  (CIK 0001064641) Form N-PX",
+          "asOf": "2024-08-30"
+        },
+        "xai2025": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 8 filing links. Shares in the parsed rows: Against 55,778.982; Abstain 20,480,611.018. Filing description: A shareholder proposal regarding Board authorization of an investment in xAl.",
+          "href": "https://www.sec.gov/Archives/edgar/data/1064641/000119312526345236/0001193125-26-345236-index.html",
+          "source": "SELECT SECTOR SPDR TRUST  (CIK 0001064641) Form N-PX",
+          "asOf": "2026-08-12"
+        },
+        "pay2025": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 8 filing links. Shares in the parsed rows: For 48,183.596; Against 20,488,206.404. Filing description: A Tesla proposal for approval of the 2025 CEO Performance Award.",
+          "href": "https://www.sec.gov/Archives/edgar/data/1064641/000119312526345236/0001193125-26-345236-index.html",
+          "source": "SELECT SECTOR SPDR TRUST  (CIK 0001064641) Form N-PX",
+          "asOf": "2026-08-12"
+        },
+        "directors2025": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 8 filing links. Shares in the parsed rows: For 41,167,101.618; Against 40,978,458.382. Filing description: A Tesla proposal to elect three Class III directors to serve for a term of three years, or until their respective successors are duly elected and qualified: Ira Ehrenpreis",
+          "href": "https://www.sec.gov/Archives/edgar/data/1064641/000119312526345236/0001193125-26-345236-index.html",
+          "source": "SELECT SECTOR SPDR TRUST  (CIK 0001064641) Form N-PX",
+          "asOf": "2026-08-12"
+        },
+        "supermajority2025": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 8 filing links. Shares in the parsed rows: For 20,531,176.205; Abstain 5,213.795. Filing description: A Tesla proposal for adoption of amendments to certificate of formation and bylaws to eliminate applicable supermajority voting requirements.",
+          "href": "https://www.sec.gov/Archives/edgar/data/1064641/000119312526345236/0001193125-26-345236-index.html",
+          "source": "SELECT SECTOR SPDR TRUST  (CIK 0001064641) Form N-PX",
+          "asOf": "2026-08-12"
+        }
+      }
+    },
+    {
+      "id": "fidelity",
+      "name": "Fidelity",
+      "note": "Form N-PX. 42 latest filing(s) for the periods ended June 30, 2024 and June 30, 2026 matched this family and CUSIP 88160R101.",
+      "filingCount": 42,
+      "parsedRows": 1800,
+      "cells": {
+        "solarcity": {
+          "status": "not-found",
+          "note": "No parsed N-PX row for this item in the family filings selected for the periods ended June 30, 2024 and June 30, 2026. The 2016 and 2018 meetings predate the XML N-PX format and were not parsed from text filings."
+        },
+        "pay2018": {
+          "status": "not-found",
+          "note": "No parsed N-PX row for this item in the family filings selected for the periods ended June 30, 2024 and June 30, 2026. The 2016 and 2018 meetings predate the XML N-PX format and were not parsed from text filings."
+        },
+        "ratify2024": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 17 filing links. Shares in the parsed rows: For 29,874,687; Against 517,442. Filing description: A Tesla proposal to ratify the 100% performance-based stock option award to Elon Musk that was proposed to and approved by our stockholders in 2018.",
+          "href": "https://www.sec.gov/Archives/edgar/data/819118/000035404624000091/0000354046-24-000091-index.html",
+          "source": "FIDELITY CONCORD STREET TRUST  (CIK 0000819118) Form N-PX",
+          "asOf": "2024-08-28"
+        },
+        "texas2024": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 17 filing links. Shares in the parsed rows: For 16,992,437; Against 13,399,692. Filing description: A Tesla proposal to approve the redomestication of Tesla from Delaware to Texas by conversion.",
+          "href": "https://www.sec.gov/Archives/edgar/data/819118/000035404624000091/0000354046-24-000091-index.html",
+          "source": "FIDELITY CONCORD STREET TRUST  (CIK 0000819118) Form N-PX",
+          "asOf": "2024-08-28"
+        },
+        "directors2024": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 17 filing links. Shares in the parsed rows: For 60,431,168; Against 30,745,219. Filing description: Election of Class II Directors to serve for a three-year term expiring in 2027: James Murdoch",
+          "href": "https://www.sec.gov/Archives/edgar/data/819118/000035404624000091/0000354046-24-000091-index.html",
+          "source": "FIDELITY CONCORD STREET TRUST  (CIK 0000819118) Form N-PX",
+          "asOf": "2024-08-28"
+        },
+        "xai2025": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 23 filing links. Shares in the parsed rows: Against 15,727,660; Abstain 18,760,613. Filing description: A shareholder proposal regarding Board authorization of an investment in xAl.",
+          "href": "https://www.sec.gov/Archives/edgar/data/819118/000081911826000174/0000819118-26-000174-index.html",
+          "source": "FIDELITY CONCORD STREET TRUST  (CIK 0000819118) Form N-PX",
+          "asOf": "2026-08-27"
+        },
+        "pay2025": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 23 filing links. Shares in the parsed rows: For 32,244,545; Against 1,104,540; Abstain 1,139,188. Filing description: A Tesla proposal for approval of the 2025 CEO Performance Award.",
+          "href": "https://www.sec.gov/Archives/edgar/data/819118/000081911826000174/0000819118-26-000174-index.html",
+          "source": "FIDELITY CONCORD STREET TRUST  (CIK 0000819118) Form N-PX",
+          "asOf": "2026-08-27"
+        },
+        "directors2025": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 23 filing links. Shares in the parsed rows: For 64,925,804; Against 73,027,288. Filing description: A Tesla proposal to elect three Class III directors to serve for a term of three years, or until their respective successors are duly elected and qualified: Ira Ehrenpreis",
+          "href": "https://www.sec.gov/Archives/edgar/data/819118/000081911826000174/0000819118-26-000174-index.html",
+          "source": "FIDELITY CONCORD STREET TRUST  (CIK 0000819118) Form N-PX",
+          "asOf": "2026-08-27"
+        },
+        "supermajority2025": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 23 filing links. Shares in the parsed rows: For 33,689,719; Against 798,554. Filing description: A Tesla proposal for adoption of amendments to certificate of formation and bylaws to eliminate applicable supermajority voting requirements.",
+          "href": "https://www.sec.gov/Archives/edgar/data/819118/000081911826000174/0000819118-26-000174-index.html",
+          "source": "FIDELITY CONCORD STREET TRUST  (CIK 0000819118) Form N-PX",
+          "asOf": "2026-08-27"
+        }
+      }
+    },
+    {
+      "id": "geode",
+      "name": "Geode",
+      "note": "Form N-PX. 2 latest filing(s) for the periods ended June 30, 2024 and June 30, 2026 matched this family and CUSIP 88160R101.",
+      "filingCount": 2,
+      "parsedRows": 4,
+      "cells": {
+        "solarcity": {
+          "status": "not-found",
+          "note": "No parsed N-PX row for this item in the family filings selected for the periods ended June 30, 2024 and June 30, 2026. The 2016 and 2018 meetings predate the XML N-PX format and were not parsed from text filings."
+        },
+        "pay2018": {
+          "status": "not-found",
+          "note": "No parsed N-PX row for this item in the family filings selected for the periods ended June 30, 2024 and June 30, 2026. The 2016 and 2018 meetings predate the XML N-PX format and were not parsed from text filings."
+        },
+        "ratify2024": {
+          "status": "not-found",
+          "note": "No parsed N-PX row for this item in the family filings selected for the periods ended June 30, 2024 and June 30, 2026. The 2016 and 2018 meetings predate the XML N-PX format and were not parsed from text filings."
+        },
+        "texas2024": {
+          "status": "not-found",
+          "note": "No parsed N-PX row for this item in the family filings selected for the periods ended June 30, 2024 and June 30, 2026. The 2016 and 2018 meetings predate the XML N-PX format and were not parsed from text filings."
+        },
+        "directors2024": {
+          "status": "not-found",
+          "note": "No parsed N-PX row for this item in the family filings selected for the periods ended June 30, 2024 and June 30, 2026. The 2016 and 2018 meetings predate the XML N-PX format and were not parsed from text filings."
+        },
+        "xai2025": {
+          "status": "not-found",
+          "note": "No parsed N-PX row for this item in the family filings selected for the periods ended June 30, 2024 and June 30, 2026. The 2016 and 2018 meetings predate the XML N-PX format and were not parsed from text filings."
+        },
+        "pay2025": {
+          "status": "not-found",
+          "note": "No parsed N-PX row for this item in the family filings selected for the periods ended June 30, 2024 and June 30, 2026. The 2016 and 2018 meetings predate the XML N-PX format and were not parsed from text filings."
+        },
+        "directors2025": {
+          "status": "not-found",
+          "note": "No parsed N-PX row for this item in the family filings selected for the periods ended June 30, 2024 and June 30, 2026. The 2016 and 2018 meetings predate the XML N-PX format and were not parsed from text filings."
+        },
+        "supermajority2025": {
+          "status": "not-found",
+          "note": "No parsed N-PX row for this item in the family filings selected for the periods ended June 30, 2024 and June 30, 2026. The 2016 and 2018 meetings predate the XML N-PX format and were not parsed from text filings."
+        }
+      }
+    },
+    {
+      "id": "capital",
+      "name": "Capital Group / American Funds",
+      "note": "Form N-PX. 31 latest filing(s) for the periods ended June 30, 2024 and June 30, 2026 matched this family and CUSIP 88160R101.",
+      "filingCount": 31,
+      "parsedRows": 440,
+      "cells": {
+        "solarcity": {
+          "status": "not-found",
+          "note": "No parsed N-PX row for this item in the family filings selected for the periods ended June 30, 2024 and June 30, 2026. The 2016 and 2018 meetings predate the XML N-PX format and were not parsed from text filings."
+        },
+        "pay2018": {
+          "status": "not-found",
+          "note": "No parsed N-PX row for this item in the family filings selected for the periods ended June 30, 2024 and June 30, 2026. The 2016 and 2018 meetings predate the XML N-PX format and were not parsed from text filings."
+        },
+        "ratify2024": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 6 filing links. Shares in the parsed rows: For 36,493,344.542; Against 6,079,043.458. Filing description: A Tesla proposal to ratify the 100% performance-based stock option award to Elon Musk that was proposed to and approved by our stockholders in 2018.",
+          "href": "https://www.sec.gov/Archives/edgar/data/44201/000110465924093934/0001104659-24-093934-index.html",
+          "source": "GROWTH FUND OF AMERICA  (CIK 0000044201) Form N-PX",
+          "asOf": "2024-08-28"
+        },
+        "texas2024": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 6 filing links. Shares in the parsed rows: For 36,493,344.542; Against 6,079,043.458. Filing description: A Tesla proposal to approve the redomestication of Tesla from Delaware to Texas by conversion.",
+          "href": "https://www.sec.gov/Archives/edgar/data/44201/000110465924093934/0001104659-24-093934-index.html",
+          "source": "GROWTH FUND OF AMERICA  (CIK 0000044201) Form N-PX",
+          "asOf": "2024-08-28"
+        },
+        "directors2024": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 6 filing links. Shares in the parsed rows: For 127,468,991.127; Against 248,172.873. Filing description: Election of Class II Directors to serve for a three-year term expiring in 2027: James Murdoch",
+          "href": "https://www.sec.gov/Archives/edgar/data/44201/000110465924093934/0001104659-24-093934-index.html",
+          "source": "GROWTH FUND OF AMERICA  (CIK 0000044201) Form N-PX",
+          "asOf": "2024-08-28"
+        },
+        "xai2025": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 11 filing links. Shares in the parsed rows: For 40,670,130; Against 7,915,506. Filing description: A shareholder proposal regarding Board authorization of an investment in xAl.",
+          "href": "https://www.sec.gov/Archives/edgar/data/44201/000110465926102934/0001104659-26-102934-index.html",
+          "source": "GROWTH FUND OF AMERICA  (CIK 0000044201) Form N-PX",
+          "asOf": "2026-08-28"
+        },
+        "pay2025": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 11 filing links. Shares in the parsed rows: For 41,238,343; Against 7,347,293. Filing description: A Tesla proposal for approval of the 2025 CEO Performance Award.",
+          "href": "https://www.sec.gov/Archives/edgar/data/44201/000110465926102934/0001104659-26-102934-index.html",
+          "source": "GROWTH FUND OF AMERICA  (CIK 0000044201) Form N-PX",
+          "asOf": "2026-08-28"
+        },
+        "directors2025": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 11 filing links. Shares in the parsed rows: For 193,774,331; Against 568,213. Filing description: A Tesla proposal to elect three Class III directors to serve for a term of three years, or until their respective successors are duly elected and qualified: Ira Ehrenpreis",
+          "href": "https://www.sec.gov/Archives/edgar/data/44201/000110465926102934/0001104659-26-102934-index.html",
+          "source": "GROWTH FUND OF AMERICA  (CIK 0000044201) Form N-PX",
+          "asOf": "2026-08-28"
+        },
+        "supermajority2025": {
+          "status": "found",
+          "label": "Split",
+          "detail": "Split across 11 filing links. Shares in the parsed rows: For 7,915,506; Against 40,670,130. Filing description: A Tesla proposal for adoption of amendments to certificate of formation and bylaws to eliminate applicable supermajority voting requirements.",
+          "href": "https://www.sec.gov/Archives/edgar/data/44201/000110465926102934/0001104659-26-102934-index.html",
+          "source": "GROWTH FUND OF AMERICA  (CIK 0000044201) Form N-PX",
+          "asOf": "2026-08-28"
+        }
+      }
+    },
+    {
+      "id": "norges",
+      "name": "Norges Bank",
+      "note": "Not an N-PX filer. Public voting-disclosure site checked; cells stay Not found unless a meeting table was parsed.",
+      "filingCount": 0,
+      "parsedRows": 0,
+      "cells": {
+        "solarcity": {
+          "status": "not-found",
+          "note": "Norges Bank does not file Form N-PX. No meeting instruction table was parsed from the public voting site in this run."
+        },
+        "pay2018": {
+          "status": "not-found",
+          "note": "Norges Bank does not file Form N-PX. No meeting instruction table was parsed from the public voting site in this run."
+        },
+        "ratify2024": {
+          "status": "not-found",
+          "note": "Norges Bank does not file Form N-PX. No meeting instruction table was parsed from the public voting site in this run."
+        },
+        "texas2024": {
+          "status": "not-found",
+          "note": "Norges Bank does not file Form N-PX. No meeting instruction table was parsed from the public voting site in this run."
+        },
+        "directors2024": {
+          "status": "not-found",
+          "note": "Norges Bank does not file Form N-PX. No meeting instruction table was parsed from the public voting site in this run."
+        },
+        "xai2025": {
+          "status": "not-found",
+          "note": "Norges Bank does not file Form N-PX. No meeting instruction table was parsed from the public voting site in this run."
+        },
+        "pay2025": {
+          "status": "not-found",
+          "note": "Norges Bank does not file Form N-PX. No meeting instruction table was parsed from the public voting site in this run."
+        },
+        "directors2025": {
+          "status": "not-found",
+          "note": "Norges Bank does not file Form N-PX. No meeting instruction table was parsed from the public voting site in this run."
+        },
+        "supermajority2025": {
+          "status": "not-found",
+          "note": "Norges Bank does not file Form N-PX. No meeting instruction table was parsed from the public voting site in this run."
+        }
+      },
+      "disclosureCheck": {
+        "checkedAt": "2026-10-24T03:07:25.340793+00:00",
+        "requests": [
+          {
+            "url": "https://www.nbim.no/en/responsible-investment/voting/our-voting-records/",
+            "status": 200,
+            "contentType": "text/html; charset=utf-8",
+            "bytes": 36118
+          }
+        ],
+        "cells": {},
+        "note": "No per-meeting instruction table was parsed from these requests. Press citations, if any, are added separately in the page source and are not implied by this check."
+      }
+    }
+  ],
+  "unclassifiedSample": [
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A Tesla proposal for a non-binding advisory vote approving 2024 executive compensation.",
+      "how": "FOR",
+      "shares": "1179.880000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A Tesla proposal for approval of the A&R 2019 Equity Incentive Plan.",
+      "how": "FOR",
+      "shares": "1179.880000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A Tesla proposal for the ratification of the appointment of PricewaterhouseCoopers LLP as Tesla's independent registered public accounting firm for the fiscal year ending December 31, 2025.",
+      "how": "FOR",
+      "shares": "1179.880000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal regarding adopting targets and reporting on metrics to assess the feasibility of integrating sustainability metrics into senior executive compensation plans.",
+      "how": "AGAINST",
+      "shares": "1179.880000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal requesting a child labor audit.",
+      "how": "AGAINST",
+      "shares": "1179.880000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal to amend the bylaws to repeal 3% derivative suit ownership threshold.",
+      "how": "AGAINST",
+      "shares": "1179.880000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal to amend Article X of the bylaws.",
+      "how": "AGAINST",
+      "shares": "1179.880000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal regarding proposal that won 54% support at 2024 Tesla annual meeting.",
+      "how": "AGAINST",
+      "shares": "1179.880000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal to seek shareholder approval before adopting an amendment to the bylaws pursuant to Section 21.373 of the TBOC.",
+      "how": "AGAINST",
+      "shares": "1179.880000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A Tesla proposal for a non-binding advisory vote approving 2024 executive compensation.",
+      "how": "AGAINST",
+      "shares": "26086.420000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A Tesla proposal for approval of the A&R 2019 Equity Incentive Plan.",
+      "how": "AGAINST",
+      "shares": "26086.420000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A Tesla proposal for the ratification of the appointment of PricewaterhouseCoopers LLP as Tesla's independent registered public accounting firm for the fiscal year ending December 31, 2025.",
+      "how": "AGAINST",
+      "shares": "26086.420000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal regarding adopting targets and reporting on metrics to assess the feasibility of integrating sustainability metrics into senior executive compensation plans.",
+      "how": "FOR",
+      "shares": "26086.420000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal requesting a child labor audit.",
+      "how": "AGAINST",
+      "shares": "26086.420000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal to amend the bylaws to repeal 3% derivative suit ownership threshold.",
+      "how": "FOR",
+      "shares": "26086.420000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal to amend Article X of the bylaws.",
+      "how": "FOR",
+      "shares": "26086.420000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal regarding proposal that won 54% support at 2024 Tesla annual meeting.",
+      "how": "FOR",
+      "shares": "26086.420000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal to seek shareholder approval before adopting an amendment to the bylaws pursuant to Section 21.373 of the TBOC.",
+      "how": "FOR",
+      "shares": "26086.420000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A Tesla proposal for a non-binding advisory vote approving 2024 executive compensation.",
+      "how": "FOR",
+      "shares": "587021.185250",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A Tesla proposal for a non-binding advisory vote approving 2024 executive compensation.",
+      "how": "FOR",
+      "shares": "587021.185250",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A Tesla proposal for approval of the A&R 2019 Equity Incentive Plan.",
+      "how": "FOR",
+      "shares": "587021.185250",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A Tesla proposal for the ratification of the appointment of PricewaterhouseCoopers LLP as Tesla's independent registered public accounting firm for the fiscal year ending December 31, 2025.",
+      "how": "FOR",
+      "shares": "587021.185250",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal regarding adopting targets and reporting on metrics to assess the feasibility of integrating sustainability metrics into senior executive compensation plans.",
+      "how": "AGAINST",
+      "shares": "587021.185250",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal requesting a child labor audit.",
+      "how": "AGAINST",
+      "shares": "587021.185250",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal to amend the bylaws to repeal 3% derivative suit ownership threshold.",
+      "how": "AGAINST",
+      "shares": "587021.185250",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal to amend Article X of the bylaws.",
+      "how": "AGAINST",
+      "shares": "587021.185250",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal regarding proposal that won 54% support at 2024 Tesla annual meeting.",
+      "how": "AGAINST",
+      "shares": "587021.185250",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal to seek shareholder approval before adopting an amendment to the bylaws pursuant to Section 21.373 of the TBOC.",
+      "how": "FOR",
+      "shares": "587021.185250",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A Tesla proposal for a non-binding advisory vote approving 2024 executive compensation.",
+      "how": "FOR",
+      "shares": "215.082350",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A Tesla proposal for approval of the A&R 2019 Equity Incentive Plan.",
+      "how": "FOR",
+      "shares": "215.082350",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A Tesla proposal for the ratification of the appointment of PricewaterhouseCoopers LLP as Tesla's independent registered public accounting firm for the fiscal year ending December 31, 2025.",
+      "how": "FOR",
+      "shares": "215.082350",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal regarding adopting targets and reporting on metrics to assess the feasibility of integrating sustainability metrics into senior executive compensation plans.",
+      "how": "AGAINST",
+      "shares": "215.082350",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal requesting a child labor audit.",
+      "how": "AGAINST",
+      "shares": "215.082350",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal to amend the bylaws to repeal 3% derivative suit ownership threshold.",
+      "how": "AGAINST",
+      "shares": "215.082350",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal to amend Article X of the bylaws.",
+      "how": "AGAINST",
+      "shares": "215.082350",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal regarding proposal that won 54% support at 2024 Tesla annual meeting.",
+      "how": "FOR",
+      "shares": "215.082350",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A shareholder proposal to seek shareholder approval before adopting an amendment to the bylaws pursuant to Section 21.373 of the TBOC.",
+      "how": "FOR",
+      "shares": "215.082350",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A Tesla proposal for a non-binding advisory vote approving 2024 executive compensation.",
+      "how": "ABSTAIN",
+      "shares": "0.000000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A Tesla proposal for a non-binding advisory vote approving 2024 executive compensation.",
+      "how": "AGAINST",
+      "shares": "5.000000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    },
+    {
+      "family": "vanguard",
+      "meeting": "2025-11-06",
+      "description": "A Tesla proposal for a non-binding advisory vote approving 2024 executive compensation.",
+      "how": "FOR",
+      "shares": "13.000000",
+      "href": "https://www.sec.gov/Archives/edgar/data/52848/000110465926102078/0001104659-26-102078-index.html"
+    }
+  ]
+}

@@ -4,127 +4,55 @@ import Base from "../layouts/Base.astro";
 
 <Base
   title="Every Share Votes"
-  description="An independent guide for TSLA shareholders while special committees explore a possible combination with SpaceX. No terms and no proxy have been filed."
+  description="A self-reported, share-weighted tally of TSLA holders on a possible combination with SpaceX. Not an official vote."
 >
   <div class="wrap">
     <section class="hero">
-      <p class="eyebrow">Independent retail-shareholder project</p>
-      <h1>Unvoted shares can be the difference.</h1>
-      <p class="lede">
-        On October 22, 2026, both companies told the SEC that special committees are exploring a
-        deeper relationship, including a possible combination. There are no terms and no proxy.
-        This site explains what is on the record, how a TSLA vote is likely to be counted, and how
-        to cast your own when there is a ballot.
-      </p>
+      <p class="eyebrow">Independent · self-reported · not a proxy</p>
+      <h1>Where holders stand on a combination.</h1>
+      <p class="lede">A live tally of TSLA shares their owners say are for or against a possible combination with SpaceX.</p>
       <div class="actions">
-        <a class="button" href="/the-vote/">Read the vote explainer</a>
-        <a class="button secondary" href="/how-to-vote/">How to vote</a>
+        <a class="button" href="/add-shares/">Add my shares</a>
+        <a class="button secondary" href="/the-vote/">What a real vote would mean</a>
       </div>
     </section>
 
-    <section class="docket" aria-label="What is on the record">
-      <article>
-        <p class="kicker">TSLA issuer</p>
-        <p>
-          The board formed a special committee of disinterested directors to explore a deeper
-          relationship with SpaceX, which could include a business combination. Nothing is assured.
-        </p>
-        <p class="source">
-          <a href="https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm">Form 10-Q</a>
-          · filed October 22, 2026 · quarter ended September 30, 2026
-        </p>
+    <section class="scoreboard" aria-label="Share-weighted tally">
+      <article class="score for">
+        <p class="kicker">For</p>
+        <strong id="for-shares">—</strong>
+        <span>shares</span>
       </article>
-      <article>
-        <p class="kicker">SpaceX</p>
-        <p>
-          Its board formed a special committee to evaluate a potential combination. Any deal would
-          also need its board and its controlling shareholder. No determination has been made.
-        </p>
-        <p class="source">
-          <a href="https://www.sec.gov/Archives/edgar/data/1181412/000162828026066880/spcx-20260930.htm">Form 10-Q</a>
-          · filed October 22, 2026 · quarter ended September 30, 2026
-        </p>
-      </article>
-      <article>
-        <p class="kicker">Not filed</p>
-        <p>
-          No agreement, price, exchange ratio, or proxy for a combination is in those reports.
-          A proxy, if one is filed later, is the document that would set the voting standard.
-        </p>
-        <p class="source">As of October 24, 2026 · see <a href="/the-vote/">The vote</a></p>
+      <article class="score against">
+        <p class="kicker">Against</p>
+        <strong id="against-shares">—</strong>
+        <span>shares</span>
       </article>
     </section>
+    <p id="score-meta" class="score-meta">Loading the tally…</p>
+    <p class="source">
+      Self-reported and unverified. Not an official vote and not a solicitation.
+      <a href="/methodology/">How the numbers are made</a>.
+    </p>
 
-    <div class="split">
-      <section class="prose">
-        <h2>Why turnout matters</h2>
-        <p>
-          Texas law’s default for a merger is two-thirds of the outstanding shares entitled to vote.
-          The Texas certificate of formation filed when the TSLA issuer converted in 2024 uses
-          different wording: a majority of the shares entitled to vote and then outstanding, including
-          for a “fundamental business transaction.” That sentence is subject to other parts of the
-          certificate and the bylaws.
-        </p>
-        <p>
-          If a future proxy uses a majority-of-outstanding standard, only yes votes fill the
-          numerator. Shares that abstain, that a broker cannot vote, or that never come back do not
-          add a yes. They make the threshold harder to reach. That reading is
-          <strong>unconfirmed</strong> until a proxy says what standard applies to the actual transaction.
-        </p>
-        <p>
-          There is a recent illustration that is confirmed. At the November 6, 2025 annual meeting,
-          a shareholder proposal on an xAI investment received more votes for than against and still
-          failed, because the company’s bylaws generally count abstentions as votes against.
-        </p>
-        <p><a href="/the-vote/">The full explanation, with the filing quotes and the vote counts.</a></p>
-      </section>
-      <aside class="callout">
-        <p class="kicker">A different meeting is already scheduled</p>
-        <p>
-          <strong>December 3, 2026 annual meeting.</strong>
-          A definitive proxy for that meeting was filed on October 19, 2026. It is not a combination
-          vote. The voluntary retail voting program does not cast a ballot at that meeting.
-        </p>
-        <p class="source">
-          <a href="https://www.sec.gov/Archives/edgar/data/1318605/000110465926116716/tm267596d6_defa14a.htm">DEFA14A filed October 19, 2026</a>
-        </p>
-      </aside>
-    </div>
+    <section class="chart-card" aria-labelledby="chart-heading">
+      <h2 id="chart-heading">Sentiment</h2>
+      <div id="sentiment-chart" class="chart"></div>
+      <p id="chart-note" class="source">Retail is the share of For versus For plus Against. The other lines are defined on the methodology page.</p>
+    </section>
 
-    <h2>What you can do here</h2>
-    <div class="grid-2">
-      <article class="card">
-        <h3>Learn the retail voting program</h3>
-        <p>
-          A voluntary standing instruction can vote with the board later. One option includes
-          mergers. The other leaves mergers and contested elections to you.
-        </p>
-        <p><a href="/retail-voting-program/">Read both options</a></p>
-      </article>
-      <article class="card">
-        <h3>Find the broker path</h3>
-        <p>
-          When a ballot exists, the company’s vote guide lists how Robinhood, Schwab, Fidelity, and
-          others deliver it. There is nothing to cast on a combination yet.
-        </p>
-        <p><a href="/how-to-vote/">Open the broker guide</a></p>
-      </article>
-      <article class="card">
-        <h3>See who files Form 13F</h3>
-        <p>
-          A sortable table of institutional managers, taken from the SEC’s 13F data set, with each
-          row linked to the filing. Retail holders are not in that file.
-        </p>
-        <p><a href="/holders/">Who holds TSLA</a></p>
-      </article>
-      <article class="card">
-        <h3>Check past votes</h3>
-        <p>
-          Certified totals for SolarCity, the 2018 award, the 2024 ratification and Texas move, and
-          the 2025 award. Proxy-adviser recommendations where the press reported them. Otherwise, “Not found.”
-        </p>
-        <p><a href="/voting-history/">Voting history</a></p>
-      </article>
-    </div>
+    <nav class="jump" aria-label="More on this site">
+      <a href="/the-vote/">The vote</a>
+      <a href="/how-to-vote/">How to cast a ballot</a>
+      <a href="/retail-voting-program/">Retail voting program</a>
+      <a href="/holders/">Who holds TSLA</a>
+      <a href="/voting-history/">Past votes</a>
+      <a href="/sentiment/">Full chart</a>
+    </nav>
   </div>
 </Base>
+
+<script>
+  import { mountDashboard } from "../scripts/dashboard";
+  mountDashboard(true);
+</script>

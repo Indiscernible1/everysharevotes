@@ -1,24 +1,51 @@
 ---
 import Base from "../layouts/Base.astro";
-import { extraSources, holderRows, meetings, outcomes, recommendationRows, xai, type HistoryCell } from "../data/history";
+import { extraSources, meetings, outcomes, recommendationRows, type HistoryCell } from "../data/history";
+import voteFile from "../../public/data/institutional-votes.json";
 
-function cell(item: HistoryCell) {
-  return item;
+type VoteCell =
+  | { status: "not-found"; note?: string }
+  | { status: "found"; label: string; detail: string; href: string; source: string; asOf?: string };
+
+interface Family {
+  name: string;
+  note?: string;
+  cells?: Record<string, VoteCell>;
+  filingCount?: number;
+  parsedRows?: number;
+}
+
+const file = voteFile as {
+  generatedAt?: string | null;
+  search?: { totalHits?: number; familyPeriodHits?: number; filingsDownloaded?: number; filedFrom?: string; filedThrough?: string };
+  errors?: unknown[];
+  olderTextSearch?: { totalHits?: number; note?: string; familyHitsOnFirstPage?: unknown[] };
+  families?: Family[];
+};
+
+const families = file.families ?? [];
+
+function recommendationCell(cells: Record<string, HistoryCell>, id: string): HistoryCell {
+  return cells[id] ?? { status: "not-found" };
+}
+
+function badgeClass(label: string): string {
+  if (label === "For" || label.startsWith("For ")) return "badge ok";
+  if (label === "Against" || label.startsWith("Against")) return "badge no";
+  return "badge";
 }
 ---
 
 <Base
   title="Voting history"
-  description="Sourced outcomes and proxy-adviser recommendations on major TSLA votes. Unsourced holder votes are marked Not found."
+  description="Sourced outcomes, proxy-adviser recommendations, and N-PX extracts for major TSLA holders."
 >
   <div class="wrap">
     <p class="eyebrow">Only sourced cells</p>
     <h1>How past TSLA votes came out.</h1>
     <p class="lede prose">
-      The first table is what the inspector certified, from Tesla’s Form 8-Ks. The second is how
-      proxy advisers recommended voting, where a news report or a company filing says so. Major
-      holders are listed because their votes matter. Where no N-PX extract, 8-K, or press report is
-      linked, the cell says Not found. That is an empty research result, not an abstention.
+      Certified totals are from Tesla’s Form 8-Ks. Adviser rows cite a news report or a company filing that states the recommendation.
+      Fund-family rows come from <code>scripts/fetch_npx.py</code>. Share figures are the shares in those N-PX rows, not the Form 13F position. A cell says Not found when that run did not read a matching vote.
     </p>
 
     <h2>Certified results</h2>
@@ -41,7 +68,9 @@ function cell(item: HistoryCell) {
                   <strong>{item.name}</strong>
                   <div class="source">{item.meeting}</div>
                 </td>
-                <td><span class="badge ok">{item.result}</span></td>
+                <td>
+                  <span class={item.result === "Approved" ? "badge ok" : "badge no"}>{item.result}</span>
+                </td>
                 <td>
                   {item.counts}
                   <div class="source">{item.note}</div>
@@ -58,14 +87,32 @@ function cell(item: HistoryCell) {
 
     <h2>Recommendations and holder votes</h2>
     <p class="prose">
-      “For” and “Against” in this table are recommendations, except where a future cell cites an
-      N-PX filing for an actual instruction. None of the institutional rows below have that citation yet.
+      N-PX search
+      {file.search?.filedFrom && file.search?.filedThrough
+        ? ` from ${file.search.filedFrom} through ${file.search.filedThrough}`
+        : ""}
+      {typeof file.search?.totalHits === "number" ? `, ${file.search.totalHits.toLocaleString("en-US")} CUSIP hits` : ""}.
+      {typeof file.search?.filingsDownloaded === "number"
+        ? ` ${file.search.filingsDownloaded} family filings were selected for the periods ended June 30, 2024 and June 30, 2026.`
+        : " Run scripts/fetch_npx.py to fill the family cells."}
+      {file.errors && file.errors.length > 0 ? ` ${file.errors.length} filings recorded an error and are not in the sums.` : ""}
+      {file.generatedAt ? ` File generated ${file.generatedAt}.` : ""}
     </p>
+    {
+      file.olderTextSearch && (
+        <p class="prose">
+          Older text N-PX search, first page only:
+          {typeof file.olderTextSearch.totalHits === "number" ? ` ${file.olderTextSearch.totalHits.toLocaleString("en-US")} hits.` : ""}
+          {" "}
+          {file.olderTextSearch.note}
+          {" "}
+          Family names on that first page: {(file.olderTextSearch.familyHitsOnFirstPage ?? []).length}.
+        </p>
+      )
+    }
     <div class="table-wrap">
       <table>
-        <caption>
-          Scroll sideways on a small screen. The first column stays put.
-        </caption>
+        <caption>Scroll sideways on a small screen. The first column stays put.</caption>
         <thead>
           <tr>
             <th class="sticky-col">Voter</th>
@@ -79,7 +126,7 @@ function cell(item: HistoryCell) {
         </thead>
         <tbody>
           {
-            [...recommendationRows, ...holderRows].map((row) => (
+            recommendationRows.map((row) => (
               <tr>
                 <th class="sticky-col" scope="row">
                   {row.name}
@@ -87,19 +134,17 @@ function cell(item: HistoryCell) {
                 </th>
                 {
                   meetings.map((meeting) => {
-                    const item = cell(row.cells[meeting.id]);
+                    const item = recommendationCell(row.cells, meeting.id);
                     if (item.status === "not-found") {
                       return (
                         <td>
-                          <abbr title="No N-PX filing, company 8-K, or press report is linked for this holder and meeting.">
-                            Not found
-                          </abbr>
+                          <abbr title="No linked report states this recommendation.">Not found</abbr>
                         </td>
                       );
                     }
                     return (
                       <td>
-                        <span class={item.label === "For" ? "badge ok" : "badge no"}>{item.label}</span>
+                        <span class={badgeClass(item.label)}>{item.label}</span>
                         <div>{item.detail}</div>
                         <div class="source">
                           <a href={item.href}>{item.source}</a>
@@ -125,18 +170,44 @@ function cell(item: HistoryCell) {
               </tr>
             ))
           }
+          {
+            families.map((family) => (
+              <tr>
+                <th class="sticky-col" scope="row">
+                  {family.name}
+                  <div class="source">
+                    {family.note}
+                    {typeof family.filingCount === "number" ? ` Parsed rows: ${family.parsedRows ?? 0}.` : ""}
+                  </div>
+                </th>
+                {
+                  meetings.map((meeting) => {
+                    const item = family.cells?.[meeting.id] ?? { status: "not-found" as const };
+                    if (item.status !== "found") {
+                      return (
+                        <td>
+                          <abbr title={item.note || "No parsed row for this item."}>Not found</abbr>
+                        </td>
+                      );
+                    }
+                    return (
+                      <td>
+                        <span class={badgeClass(item.label)}>{item.label}</span>
+                        <div>{item.detail}</div>
+                        <div class="source">
+                          <a href={item.href}>{item.source}</a>
+                          <br />
+                          {item.asOf}
+                        </div>
+                      </td>
+                    );
+                  })
+                }
+              </tr>
+            ))
+          }
         </tbody>
       </table>
     </div>
-
-    <section class="prose">
-      <h2>The xAI proposal is the clearest recent count</h2>
-      <p>{xai.prose}</p>
-      <p>Certified counts: {xai.counts}</p>
-      <p class="source">
-        <a href={xai.href}>{xai.source}</a> · meeting {xai.meeting}
-      </p>
-      <p>It is not one of the five columns above because it was a shareholder proposal, not one of those five corporate items. The same 8-K is the source.</p>
-    </section>
   </div>
 </Base>

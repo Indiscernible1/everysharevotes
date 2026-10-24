@@ -24,7 +24,7 @@ import Base from "../layouts/Base.astro";
       <li>A map to the company’s own voting instructions and retail voting program.</li>
       <li>A table of Form 13F positions, generated from the SEC’s quarterly data set.</li>
       <li>A voting-history table that leaves a cell blank of any number unless a filing or a press report is linked.</li>
-      <li>An unscientific sentiment poll, labeled as such.</li>
+      <li>A self-reported share ledger, labeled unverified, plus a sentiment chart that leaves missing series empty.</li>
     </ul>
     <h2>What this is not</h2>
     <ul class="clean">
@@ -43,11 +43,11 @@ import Base from "../layouts/Base.astro";
       when the JSON changes. Set the repository secret <code>SEC_CONTACT_EMAIL</code> to a mailbox
       a person monitors.
     </p>
-    <h2>How the poll is stored</h2>
+    <h2>How the tally is stored</h2>
     <p>
-      Cloudflare Pages runs <code>functions/api/sentiment.ts</code> against a D1 database bound as
-      <code>DB</code>. The schema is <code>migrations/0001_sentiment.sql</code>. Nothing is seeded.
-      If the binding is missing, the poll says so and shows no tally.
+      Cloudflare Pages runs <code>functions/api/shares.ts</code> against a D1 database bound as
+      <code>DB</code>. The ledger schema is <code>migrations/0002_share_ledger.sql</code>. Nothing is seeded.
+      The rules are on the <a href="/methodology/">methodology</a> page. If the binding, the hash salt, or Turnstile is missing, the page says so and does not show a made-up zero.
     </p>
     <h2>Corrections</h2>
     <p>

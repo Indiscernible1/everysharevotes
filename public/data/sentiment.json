@@ -1,0 +1,863 @@
+{
+  "generatedAt": "2026-10-24T02:53:48.452062+00:00",
+  "media": {
+    "method": "none",
+    "query": "\"Tesla\" \"SpaceX\" merger",
+    "source": "GDELT DOC 2.0 API",
+    "sourceUrl": "https://api.gdeltproject.org/api/v2/doc/doc",
+    "timespan": "3months",
+    "requests": [
+      {
+        "url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22Tesla%22+%22SpaceX%22+merger&mode=timelinetone&format=json&timespan=3months",
+        "status": 429,
+        "points": 0
+      },
+      {
+        "url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22Tesla%22+%22SpaceX%22+merger&mode=artlist&format=json&timespan=3months&maxrecords=75",
+        "status": 429,
+        "points": 0
+      }
+    ],
+    "rescale": "GDELT tone: display = clamp(50 + tone * 5, 0, 100). Title lexicon: tone is (positive hits - negative hits) / title words, and display = clamp(50 + tone * 50, 0, 100).",
+    "lexicon": {
+      "positive": [
+        "approve",
+        "approved",
+        "approves",
+        "support",
+        "supports",
+        "supported",
+        "back",
+        "backs",
+        "backed",
+        "win",
+        "wins",
+        "agree",
+        "agrees",
+        "synergy",
+        "synergies",
+        "optimistic",
+        "rally",
+        "rallies",
+        "surge",
+        "surges"
+      ],
+      "negative": [
+        "against",
+        "oppose",
+        "opposes",
+        "opposed",
+        "reject",
+        "rejects",
+        "rejected",
+        "block",
+        "blocks",
+        "blocked",
+        "dilution",
+        "dilutive",
+        "conflict",
+        "conflicts",
+        "sue",
+        "sues",
+        "lawsuit",
+        "fail",
+        "fails",
+        "failed",
+        "worry",
+        "worries",
+        "risk",
+        "risks",
+        "crash",
+        "plunge",
+        "plunges"
+      ]
+    },
+    "points": []
+  },
+  "market": {
+    "primary": {
+      "venue": "Polymarket",
+      "question": "Tesla and SpaceX merger officially announced by December 31?",
+      "marketId": "2252540",
+      "tokenId": "54008746047030401937229622392846672148881831664328316511258982815120785809185",
+      "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-december-31",
+      "historyUrl": "https://clob.polymarket.com/prices-history?market=54008746047030401937229622392846672148881831664328316511258982815120785809185&interval=max&fidelity=1440",
+      "historyStatus": 200,
+      "points": [
+        {
+          "date": "2026-05-14",
+          "yes": 0.42
+        },
+        {
+          "date": "2026-05-15",
+          "yes": 0.495
+        },
+        {
+          "date": "2026-05-16",
+          "yes": 0.515
+        },
+        {
+          "date": "2026-05-17",
+          "yes": 0.17
+        },
+        {
+          "date": "2026-05-18",
+          "yes": 0.16
+        },
+        {
+          "date": "2026-05-19",
+          "yes": 0.155
+        },
+        {
+          "date": "2026-05-20",
+          "yes": 0.16
+        },
+        {
+          "date": "2026-05-21",
+          "yes": 0.155
+        },
+        {
+          "date": "2026-05-22",
+          "yes": 0.195
+        },
+        {
+          "date": "2026-05-23",
+          "yes": 0.195
+        },
+        {
+          "date": "2026-05-24",
+          "yes": 0.195
+        },
+        {
+          "date": "2026-05-25",
+          "yes": 0.215
+        },
+        {
+          "date": "2026-05-26",
+          "yes": 0.38
+        },
+        {
+          "date": "2026-05-27",
+          "yes": 0.335
+        },
+        {
+          "date": "2026-05-28",
+          "yes": 0.355
+        },
+        {
+          "date": "2026-05-29",
+          "yes": 0.43
+        },
+        {
+          "date": "2026-05-30",
+          "yes": 0.385
+        },
+        {
+          "date": "2026-05-31",
+          "yes": 0.315
+        },
+        {
+          "date": "2026-06-01",
+          "yes": 0.4
+        },
+        {
+          "date": "2026-06-02",
+          "yes": 0.345
+        },
+        {
+          "date": "2026-06-03",
+          "yes": 0.37
+        },
+        {
+          "date": "2026-06-04",
+          "yes": 0.41
+        },
+        {
+          "date": "2026-06-05",
+          "yes": 0.415
+        },
+        {
+          "date": "2026-06-06",
+          "yes": 0.43
+        },
+        {
+          "date": "2026-06-07",
+          "yes": 0.425
+        },
+        {
+          "date": "2026-06-08",
+          "yes": 0.425
+        },
+        {
+          "date": "2026-06-09",
+          "yes": 0.41
+        },
+        {
+          "date": "2026-06-10",
+          "yes": 0.375
+        },
+        {
+          "date": "2026-06-11",
+          "yes": 0.375
+        },
+        {
+          "date": "2026-06-12",
+          "yes": 0.375
+        },
+        {
+          "date": "2026-06-13",
+          "yes": 0.365
+        },
+        {
+          "date": "2026-06-14",
+          "yes": 0.355
+        },
+        {
+          "date": "2026-06-15",
+          "yes": 0.365
+        },
+        {
+          "date": "2026-06-16",
+          "yes": 0.36
+        },
+        {
+          "date": "2026-06-17",
+          "yes": 0.36
+        },
+        {
+          "date": "2026-06-18",
+          "yes": 0.33
+        },
+        {
+          "date": "2026-06-19",
+          "yes": 0.35
+        },
+        {
+          "date": "2026-06-20",
+          "yes": 0.37
+        },
+        {
+          "date": "2026-06-21",
+          "yes": 0.36
+        },
+        {
+          "date": "2026-06-22",
+          "yes": 0.37
+        },
+        {
+          "date": "2026-06-23",
+          "yes": 0.36
+        },
+        {
+          "date": "2026-06-24",
+          "yes": 0.395
+        },
+        {
+          "date": "2026-06-25",
+          "yes": 0.375
+        },
+        {
+          "date": "2026-06-26",
+          "yes": 0.39
+        },
+        {
+          "date": "2026-06-27",
+          "yes": 0.385
+        },
+        {
+          "date": "2026-06-28",
+          "yes": 0.385
+        },
+        {
+          "date": "2026-06-29",
+          "yes": 0.39
+        },
+        {
+          "date": "2026-06-30",
+          "yes": 0.335
+        },
+        {
+          "date": "2026-07-01",
+          "yes": 0.325
+        },
+        {
+          "date": "2026-07-02",
+          "yes": 0.255
+        },
+        {
+          "date": "2026-07-03",
+          "yes": 0.245
+        },
+        {
+          "date": "2026-07-04",
+          "yes": 0.25
+        },
+        {
+          "date": "2026-07-05",
+          "yes": 0.245
+        },
+        {
+          "date": "2026-07-06",
+          "yes": 0.25
+        },
+        {
+          "date": "2026-07-07",
+          "yes": 0.245
+        },
+        {
+          "date": "2026-07-08",
+          "yes": 0.24
+        },
+        {
+          "date": "2026-07-09",
+          "yes": 0.25
+        },
+        {
+          "date": "2026-07-10",
+          "yes": 0.245
+        },
+        {
+          "date": "2026-07-11",
+          "yes": 0.245
+        },
+        {
+          "date": "2026-07-12",
+          "yes": 0.245
+        },
+        {
+          "date": "2026-07-13",
+          "yes": 0.245
+        },
+        {
+          "date": "2026-07-14",
+          "yes": 0.245
+        },
+        {
+          "date": "2026-07-15",
+          "yes": 0.245
+        },
+        {
+          "date": "2026-07-16",
+          "yes": 0.24
+        },
+        {
+          "date": "2026-07-17",
+          "yes": 0.23
+        },
+        {
+          "date": "2026-07-18",
+          "yes": 0.235
+        },
+        {
+          "date": "2026-07-19",
+          "yes": 0.23
+        },
+        {
+          "date": "2026-07-20",
+          "yes": 0.235
+        },
+        {
+          "date": "2026-07-21",
+          "yes": 0.235
+        },
+        {
+          "date": "2026-07-22",
+          "yes": 0.235
+        },
+        {
+          "date": "2026-07-23",
+          "yes": 0.225
+        },
+        {
+          "date": "2026-07-24",
+          "yes": 0.225
+        },
+        {
+          "date": "2026-07-25",
+          "yes": 0.18
+        },
+        {
+          "date": "2026-07-26",
+          "yes": 0.195
+        },
+        {
+          "date": "2026-07-27",
+          "yes": 0.19
+        },
+        {
+          "date": "2026-07-28",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-07-29",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-07-30",
+          "yes": 0.18
+        },
+        {
+          "date": "2026-07-31",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-08-01",
+          "yes": 0.195
+        },
+        {
+          "date": "2026-08-02",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-08-03",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-08-04",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-08-05",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-08-06",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-08-07",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-08-08",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-08-09",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-08-10",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-08-11",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-08-12",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-08-13",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-08-14",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-08-15",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-08-16",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-08-17",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-08-18",
+          "yes": 0.19
+        },
+        {
+          "date": "2026-08-19",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-08-20",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-08-21",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-08-22",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-08-23",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-08-24",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-08-25",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-08-26",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-08-27",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-08-28",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-08-29",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-08-30",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-08-31",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-09-01",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-09-02",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-09-03",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-09-04",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-09-05",
+          "yes": 0.165
+        },
+        {
+          "date": "2026-09-06",
+          "yes": 0.165
+        },
+        {
+          "date": "2026-09-07",
+          "yes": 0.165
+        },
+        {
+          "date": "2026-09-08",
+          "yes": 0.165
+        },
+        {
+          "date": "2026-09-09",
+          "yes": 0.165
+        },
+        {
+          "date": "2026-09-10",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-09-11",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-09-12",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-09-13",
+          "yes": 0.17
+        },
+        {
+          "date": "2026-09-14",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-09-15",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-09-16",
+          "yes": 0.195
+        },
+        {
+          "date": "2026-09-17",
+          "yes": 0.195
+        },
+        {
+          "date": "2026-09-18",
+          "yes": 0.195
+        },
+        {
+          "date": "2026-09-19",
+          "yes": 0.195
+        },
+        {
+          "date": "2026-09-20",
+          "yes": 0.195
+        },
+        {
+          "date": "2026-09-21",
+          "yes": 0.195
+        },
+        {
+          "date": "2026-09-22",
+          "yes": 0.195
+        },
+        {
+          "date": "2026-09-23",
+          "yes": 0.19
+        },
+        {
+          "date": "2026-09-24",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-09-25",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-09-26",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-09-27",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-09-28",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-09-29",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-09-30",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-10-01",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-10-02",
+          "yes": 0.165
+        },
+        {
+          "date": "2026-10-03",
+          "yes": 0.155
+        },
+        {
+          "date": "2026-10-04",
+          "yes": 0.155
+        },
+        {
+          "date": "2026-10-05",
+          "yes": 0.155
+        },
+        {
+          "date": "2026-10-06",
+          "yes": 0.15
+        },
+        {
+          "date": "2026-10-07",
+          "yes": 0.145
+        },
+        {
+          "date": "2026-10-08",
+          "yes": 0.135
+        },
+        {
+          "date": "2026-10-09",
+          "yes": 0.145
+        },
+        {
+          "date": "2026-10-10",
+          "yes": 0.145
+        },
+        {
+          "date": "2026-10-11",
+          "yes": 0.145
+        },
+        {
+          "date": "2026-10-12",
+          "yes": 0.145
+        },
+        {
+          "date": "2026-10-13",
+          "yes": 0.145
+        },
+        {
+          "date": "2026-10-14",
+          "yes": 0.145
+        },
+        {
+          "date": "2026-10-15",
+          "yes": 0.2
+        },
+        {
+          "date": "2026-10-16",
+          "yes": 0.25
+        },
+        {
+          "date": "2026-10-17",
+          "yes": 0.235
+        },
+        {
+          "date": "2026-10-18",
+          "yes": 0.235
+        },
+        {
+          "date": "2026-10-19",
+          "yes": 0.275
+        },
+        {
+          "date": "2026-10-20",
+          "yes": 0.175
+        },
+        {
+          "date": "2026-10-21",
+          "yes": 0.18
+        },
+        {
+          "date": "2026-10-23",
+          "yes": 0.185
+        },
+        {
+          "date": "2026-10-24",
+          "yes": 0.195
+        }
+      ],
+      "note": "One UTC-day snapshot, the last YES price returned for that day. No days were filled in."
+    },
+    "venues": [
+      {
+        "venue": "Polymarket",
+        "question": "Tesla and SpaceX merger officially announced by December 31?",
+        "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-december-31",
+        "yes": 0.195,
+        "asOf": "2026-10-24T02:53:48.452062+00:00",
+        "inChart": true,
+        "note": "Charted YES price."
+      },
+      {
+        "venue": "Polymarket",
+        "question": "Tesla and SpaceX merger officially announced by September 30?",
+        "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30",
+        "yes": 0.0,
+        "asOf": "2026-10-24T02:53:48.452062+00:00",
+        "inChart": false,
+        "note": "Different deadline. Not included in the chart line."
+      },
+      {
+        "venue": "Polymarket",
+        "question": "Tesla and SpaceX merger officially announced by January 31, 2027?",
+        "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30",
+        "yes": 0.295,
+        "asOf": "2026-10-24T02:53:48.452062+00:00",
+        "inChart": false,
+        "note": "Different deadline. Not included in the chart line."
+      },
+      {
+        "venue": "Polymarket",
+        "question": "Tesla and SpaceX merger officially announced by December 31, 2027?",
+        "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30",
+        "yes": 0.655,
+        "asOf": "2026-10-24T02:53:48.452062+00:00",
+        "inChart": false,
+        "note": "Different deadline. Not included in the chart line."
+      },
+      {
+        "venue": "Polymarket",
+        "question": "Tesla and SpaceX merger officially announced by February 28, 2027?",
+        "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30",
+        "yes": 0.345,
+        "asOf": "2026-10-24T02:53:48.452062+00:00",
+        "inChart": false,
+        "note": "Different deadline. Not included in the chart line."
+      },
+      {
+        "venue": "Polymarket",
+        "question": "Tesla and SpaceX merger officially announced by June 30, 2027?",
+        "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30",
+        "yes": 0.595,
+        "asOf": "2026-10-24T02:53:48.452062+00:00",
+        "inChart": false,
+        "note": "Different deadline. Not included in the chart line."
+      },
+      {
+        "venue": "Polymarket",
+        "question": "Tesla and SpaceX merger officially announced by June 30?",
+        "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30",
+        "yes": 0.0,
+        "asOf": "2026-10-24T02:53:48.452062+00:00",
+        "inChart": false,
+        "note": "Different deadline. Not included in the chart line."
+      },
+      {
+        "venue": "Manifold",
+        "question": "Will Tesla and SpaceX officially announce a merger, or a formal merger process, by December 31, 2026?",
+        "url": "https://manifold.markets/BarryJones/will-tesla-and-spacex-officially-an",
+        "yes": 0.799999999999999,
+        "asOf": "2026-10-24T02:53:48.452062+00:00",
+        "inChart": false,
+        "historyPoints": 0,
+        "note": "Stored as its own question. Not averaged with Polymarket."
+      },
+      {
+        "venue": "Manifold",
+        "question": "SpaceX & Tesla Merger before 2028",
+        "url": "https://manifold.markets/Babawagen/spacex-tesla-merger-before-2028",
+        "yes": 0.6899999999999998,
+        "asOf": "2026-10-24T02:53:48.452062+00:00",
+        "inChart": false,
+        "historyPoints": 0,
+        "note": "Stored as its own question. Not averaged with Polymarket."
+      },
+      {
+        "venue": "Manifold",
+        "question": "Will SpaceX combine with Tesla in 2026?",
+        "url": "https://manifold.markets/ac/will-spacex-combine-with-tesla-in-2",
+        "yes": 0.009999999999999978,
+        "asOf": "2026-10-24T02:53:48.452062+00:00",
+        "inChart": false,
+        "historyPoints": 0,
+        "note": "Stored as its own question. Not averaged with Polymarket."
+      },
+      {
+        "venue": "Kalshi",
+        "question": null,
+        "status": "no-market",
+        "asOf": "2026-10-24T02:54:27.996277+00:00",
+        "inChart": false,
+        "matches": [],
+        "note": "No open Kalshi market matching SpaceX and a Tesla combination was in the queried pages."
+      }
+    ],
+    "manifoldHistory": [],
+    "kalshi": {
+      "checkedAt": "2026-10-24T02:54:27.996277+00:00",
+      "queries": [
+        {
+          "url": "https://api.elections.kalshi.com/trade-api/v2/events?limit=200&status=open&with_nested_markets=true",
+          "status": 200
+        },
+        {
+          "url": "https://api.elections.kalshi.com/trade-api/v2/markets?limit=200&status=open",
+          "status": 200
+        }
+      ],
+      "matches": [],
+      "status": "no-market"
+    }
+  }
+}

@@ -550,6 +550,15 @@ button[type="submit"],
   min-height: 1.4rem;
 }
 
+.status.is-alert {
+  color: var(--red);
+  font-weight: 700;
+  background: #f8e4e4;
+  border: 1px solid #e4c0c0;
+  border-radius: 0.7rem;
+  padding: 0.7rem 0.85rem;
+}
+
 .scoreboard {
   display: grid;
   grid-template-columns: 1fr 1fr;

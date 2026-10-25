@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import { usableTurnstileSiteKey } from "../lib/turnstile-sitekey";
 
 const brokers = [
   "Schwab",
@@ -14,7 +15,7 @@ const brokers = [
   "Public",
   "Other",
 ];
-const sitekey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "";
+const sitekey = usableTurnstileSiteKey(import.meta.env.PUBLIC_TURNSTILE_SITE_KEY);
 ---
 
 <Base
@@ -63,7 +64,7 @@ const sitekey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "";
       <p class="source">Use a minus to reduce a prior entry at the same broker and stance. The counted net cannot go below zero. The same change at the same broker is stored once. An entry over 100,000 shares is held for review and left out of the totals.</p>
       <div id="turnstile"></div>
       <button type="submit">Add to the tally</button>
-      <p id="share-status" class="status" role="status"></p>
+      <p id="share-status" class="status" role="alert" aria-live="assertive"></p>
     </form>
 
     <h2>By broker</h2>

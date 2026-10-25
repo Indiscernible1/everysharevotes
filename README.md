@@ -105,11 +105,14 @@ npx wrangler d1 migrations apply everysharevotes --remote
 
 In the Pages project settings, bind the same D1 database to production and preview as the variable name `DB`. A dashboard binding is what the deployed function sees. The `database_id` in `wrangler.toml` is the production id, so a Pages deploy can attach this database.
 
-Set these Pages secrets (production and preview):
+Turnstile site key (build and runtime):
+
+- `PUBLIC_TURNSTILE_SITE_KEY` — the Site Key from the Turnstile widget for everysharevotes.com. Paste the key itself (a production key looks like `0x4AAA…`). Do not paste the variable name `PUBLIC_TURNSTILE_SITE_KEY`. Pages must expose this variable to the build. `GET /api/config` also reads it at runtime and returns `{ turnstileSiteKey }`, so a corrected value is used on the next deploy without writing the key into the HTML. The meta tag is only a fallback. An empty value, whitespace, the literal name, or anything that is not a site key disables the form. On localhost, if neither source has a real key, the page uses Cloudflare’s test site key.
+
+Runtime secrets (production and preview). These are not baked into the site:
 
 - `IP_HASH_SALT` — a long random string. Rotating it splits returning browsers into a new identity. Never commit it.
-- `TURNSTILE_SECRET_KEY` — the secret from the Cloudflare Turnstile widget you create for everysharevotes.com. Do not deploy the test secret. The function rejects the published test secret on any host other than localhost.
-- `PUBLIC_TURNSTILE_SITE_KEY` — the matching site key, available at build time. The Add shares page uses Cloudflare’s test site key only when the hostname is localhost or 127.0.0.1.
+- `TURNSTILE_SECRET_KEY` — the secret key from that same Turnstile widget. Not the site key. Do not deploy the test secret. The function rejects the published test secret on any host other than localhost.
 - `ADMIN_REVIEW_TOKEN` — optional. `POST /api/review` with header `x-review-token` can mark a held row `counted` or `rejected`.
 
 If `DB`, the salt, or the Turnstile secret is missing, `POST /api/shares` returns HTTP 503. The home page then shows an em dash, not a fake zero. An empty database that is configured shows 0 / 0.

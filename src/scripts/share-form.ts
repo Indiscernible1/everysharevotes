@@ -1,5 +1,9 @@
+import { usableTurnstileSiteKey } from "../lib/turnstile-sitekey";
+
 const TEST_SITEKEY = "1x00000000000000000000AA";
 const DUMMY_TOKEN = "XXXX.DUMMY.TOKEN.XXXX";
+const UNCONFIGURED =
+  "Turnstile is not configured. Set PUBLIC_TURNSTILE_SITE_KEY to the real site key and redeploy.";
 
 interface TurnstileApi {
   render(selector: string, options: { sitekey: string; callback: (token: string) => void }): string;
@@ -41,61 +45,91 @@ interface Totals {
 
 let widgetId = "";
 let turnstileToken = "";
+let acceptSubmit = false;
 
 export function mountShareForm(): void {
   const form = document.querySelector<HTMLFormElement>("#share-form");
   const status = document.querySelector<HTMLElement>("#share-status");
   if (!form || !status) return;
-  const sitekey = turnstileSiteKey();
-  if (!sitekey) {
-    status.textContent = "Turnstile is not configured for this host, so submissions are off.";
-    form.querySelectorAll("button, input, select").forEach((node) => {
-      (node as HTMLInputElement).disabled = true;
-    });
+  const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+  if (submitButton) submitButton.disabled = true;
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (!acceptSubmit) return;
+    void submitShare(form, status);
+  });
+
+  void (async () => {
+    const sitekey = await resolveSiteKey();
+    if (!sitekey) {
+      showStatus(status, UNCONFIGURED, true);
+      form.querySelectorAll("button, input, select, textarea").forEach((node) => {
+        (node as HTMLInputElement).disabled = true;
+      });
+      void refresh();
+      return;
+    }
+    acceptSubmit = true;
+    if (submitButton) submitButton.disabled = false;
+    void renderTurnstile(sitekey);
+    void refresh();
+  })();
+}
+
+async function submitShare(form: HTMLFormElement, status: HTMLElement): Promise<void> {
+  const data = new FormData(form);
+  const stance = String(data.get("stance") || "");
+  const broker = String(data.get("broker") || "");
+  const shares = Number(String(data.get("shares") || "").trim());
+  if (!BROKERS.includes(broker) || !["for", "against", "undecided"].includes(stance)) {
+    showStatus(status, "Choose a stance and a broker.", true);
     return;
   }
-  void renderTurnstile(sitekey);
-  void refresh();
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const data = new FormData(form);
-    const stance = String(data.get("stance") || "");
-    const broker = String(data.get("broker") || "");
-    const shares = Number(String(data.get("shares") || "").trim());
-    if (!BROKERS.includes(broker) || !["for", "against", "undecided"].includes(stance)) {
-      status.textContent = "Choose a stance and a broker.";
-      return;
-    }
-    if (!Number.isInteger(shares) || shares === 0) {
-      status.textContent = "Enter a whole number of shares, positive to add or negative to reduce. Zero is not stored.";
-      return;
-    }
-    const token = turnstileToken || (isLocal() ? DUMMY_TOKEN : "");
-    if (!token) {
-      status.textContent = "Complete the check above the button, then submit again.";
-      return;
-    }
-    status.textContent = "Saving…";
-    const response = await fetch("/api/shares", {
-      method: "POST",
-      headers: { "content-type": "application/json", accept: "application/json" },
-      body: JSON.stringify({ stance, broker, shares, turnstileToken: token }),
-    });
-    const payload = (await response.json()) as Totals;
-    turnstileToken = "";
-    if (window.turnstile && widgetId) window.turnstile.reset(widgetId);
-    if (!response.ok) {
-      status.textContent = payload.message || messageFor(payload.error);
-      return;
-    }
-    status.textContent =
-      payload.stored?.status === "held"
-        ? "Stored and held for review. It is not in the public totals."
-        : "Stored. The public totals include this row.";
-    paint(payload);
-    const sharesInput = form.querySelector<HTMLInputElement>('input[name="shares"]');
-    if (sharesInput) sharesInput.value = "";
+  if (!Number.isInteger(shares) || shares === 0) {
+    showStatus(status, "Enter a whole number of shares, positive to add or negative to reduce. Zero is not stored.", true);
+    return;
+  }
+  const token = turnstileToken || (isLocal() ? DUMMY_TOKEN : "");
+  if (!token) {
+    showStatus(status, "Complete the check above the button, then submit again.", true);
+    return;
+  }
+  showStatus(status, "Saving…", false);
+  const response = await fetch("/api/shares", {
+    method: "POST",
+    headers: { "content-type": "application/json", accept: "application/json" },
+    body: JSON.stringify({ stance, broker, shares, turnstileToken: token }),
   });
+  let payload: Partial<Totals> = {};
+  try {
+    payload = (await response.json()) as Partial<Totals>;
+  } catch {
+    payload = {};
+  }
+  turnstileToken = "";
+  if (window.turnstile && widgetId) window.turnstile.reset(widgetId);
+  if (!response.ok) {
+    showStatus(status, payload.message || messageFor(payload.error), true);
+    return;
+  }
+  showStatus(
+    status,
+    payload.stored?.status === "held"
+      ? "Stored and held for review. It is not in the public totals."
+      : "Stored. The public totals include this row.",
+    false,
+  );
+  if (payload.totals) paint(payload as Totals);
+  const sharesInput = form.querySelector<HTMLInputElement>('input[name="shares"]');
+  if (sharesInput) sharesInput.value = "";
+}
+
+function showStatus(status: HTMLElement, message: string, alert: boolean): void {
+  status.textContent = message;
+  status.classList.toggle("is-alert", alert);
+  if (!alert) return;
+  status.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
 function messageFor(error: string | undefined): string {
@@ -112,7 +146,7 @@ async function refresh(): Promise<void> {
   const response = await fetch("/api/shares", { headers: { accept: "application/json" } });
   if (!response.ok) {
     const status = document.querySelector<HTMLElement>("#share-status");
-    if (status) status.textContent = "The tally is not connected.";
+    if (status && !status.textContent) status.textContent = "The tally is not connected.";
     return;
   }
   paint((await response.json()) as Totals);
@@ -176,9 +210,33 @@ function isLocal(): boolean {
   return location.hostname === "localhost" || location.hostname === "127.0.0.1";
 }
 
-function turnstileSiteKey(): string {
+async function resolveSiteKey(): Promise<string> {
+  const fromApi = usableTurnstileSiteKey(await fetchRuntimeSiteKey());
+  if (fromApi) return fromApi;
+  const fromMeta = usableTurnstileSiteKey(
+    document.querySelector('meta[name="turnstile-sitekey"]')?.getAttribute("content"),
+  );
+  if (fromMeta) return fromMeta;
   if (isLocal()) return TEST_SITEKEY;
-  return document.querySelector('meta[name="turnstile-sitekey"]')?.getAttribute("content")?.trim() || "";
+  return "";
+}
+
+async function fetchRuntimeSiteKey(): Promise<string> {
+  const controller = new AbortController();
+  const timer = window.setTimeout(() => controller.abort(), 4000);
+  try {
+    const response = await fetch("/api/config", {
+      headers: { accept: "application/json" },
+      signal: controller.signal,
+    });
+    if (!response.ok) return "";
+    const payload = (await response.json()) as { turnstileSiteKey?: unknown };
+    return typeof payload.turnstileSiteKey === "string" ? payload.turnstileSiteKey : "";
+  } catch {
+    return "";
+  } finally {
+    window.clearTimeout(timer);
+  }
 }
 
 function renderTurnstile(sitekey: string): void {

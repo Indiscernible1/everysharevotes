@@ -1,7 +1,11 @@
 # Local only. `wrangler pages dev` reads .dev.vars. Do not commit that file.
+# TURNSTILE_SECRET_KEY and IP_HASH_SALT are runtime secrets.
 # The values below are Cloudflare's published Turnstile test pair. They always
 # pass, and the API rejects this secret on any host other than localhost.
 TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
 IP_HASH_SALT=replace-with-a-long-random-string
+# Optional site key. Leave unset on localhost; the page uses the test site key.
+# If you set it, paste the Site Key, not the name PUBLIC_TURNSTILE_SITE_KEY.
+# PUBLIC_TURNSTILE_SITE_KEY=
 # Optional. Required only for POST /api/review.
 # ADMIN_REVIEW_TOKEN=

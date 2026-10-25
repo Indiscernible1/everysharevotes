@@ -1,3 +1,4 @@
+import { formatInt, formatPeriod, formatTinyPct } from "../lib/format";
 import { usableTurnstileSiteKey } from "../lib/turnstile-sitekey";
 
 const TEST_SITEKEY = "1x00000000000000000000AA";
@@ -32,6 +33,25 @@ const BROKERS = [
 
 const numberFormat = new Intl.NumberFormat("en-US");
 
+interface BrokerMatch {
+  status: "matched" | "none";
+  filer?: string;
+  shortLabel?: string;
+  shares?: number;
+  filingDate?: string;
+  reportPeriod?: string;
+  sourceUrl?: string;
+  rule?: string;
+}
+
+interface BrokerMapFile {
+  reportPeriod: string;
+  tableShares: number;
+  tableManagers: number;
+  note?: string;
+  brokers: Record<string, BrokerMatch>;
+}
+
 interface Totals {
   totals: { for: number; against: number; undecided: number };
   holders: number;
@@ -46,6 +66,7 @@ interface Totals {
 let widgetId = "";
 let turnstileToken = "";
 let acceptSubmit = false;
+let brokerMap: BrokerMapFile | null = null;
 
 export function mountShareForm(): void {
   const form = document.querySelector<HTMLFormElement>("#share-form");
@@ -61,7 +82,8 @@ export function mountShareForm(): void {
   });
 
   void (async () => {
-    const sitekey = await resolveSiteKey();
+    const [sitekey, map] = await Promise.all([resolveSiteKey(), loadBrokerMap()]);
+    brokerMap = map;
     if (!sitekey) {
       showStatus(status, UNCONFIGURED, true);
       form.querySelectorAll("button, input, select, textarea").forEach((node) => {
@@ -113,23 +135,63 @@ async function submitShare(form: HTMLFormElement, status: HTMLElement): Promise<
     showStatus(status, payload.message || messageFor(payload.error), true);
     return;
   }
-  showStatus(
-    status,
-    payload.stored?.status === "held"
-      ? "Stored and held for review. It is not in the public totals."
-      : "Stored. The public totals include this row.",
-    false,
-  );
+  if (payload.stored?.status === "held") {
+    showStatus(status, "Stored and held for review. It is not in the public totals, so it is not shown against a 13F filer.", true);
+  } else {
+    showStoredComparison(status, broker, shares);
+  }
   if (payload.totals) paint(payload as Totals);
   const sharesInput = form.querySelector<HTMLInputElement>('input[name="shares"]');
   if (sharesInput) sharesInput.value = "";
 }
 
 function showStatus(status: HTMLElement, message: string, alert: boolean): void {
-  status.textContent = message;
+  status.classList.remove("is-note");
   status.classList.toggle("is-alert", alert);
+  status.replaceChildren(document.createTextNode(message));
   if (!alert) return;
   status.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+function showStoredComparison(status: HTMLElement, broker: string, shares: number): void {
+  status.classList.remove("is-alert");
+  status.classList.add("is-note");
+  const match = brokerMap?.brokers?.[broker];
+  const size = Math.abs(shares);
+  const shareText = `${shares > 0 ? "+" : ""}${numberFormat.format(shares)} shares`;
+  status.replaceChildren();
+  if (match?.status === "matched" && match.shares && match.shortLabel) {
+    const pct = formatTinyPct(size, match.shares);
+    status.append(
+      document.createTextNode(
+        `Stored. ${shareText} · ${pct} of ${match.shortLabel}’s reported 13F TSLA (${formatInt(match.shares)} shares, ${formatPeriod(match.reportPeriod)}, filed ${match.filingDate ?? "date not labeled"}). `,
+      ),
+    );
+    if (match.sourceUrl) {
+      const link = document.createElement("a");
+      link.href = match.sourceUrl;
+      link.textContent = "13F index";
+      status.append(link, document.createTextNode(". "));
+    }
+    status.append(document.createTextNode("Self-reported retail, not part of that filer’s vote."));
+  } else if (match?.status === "none") {
+    status.append(
+      document.createTextNode(`Stored. ${shareText} at ${broker}. No matching 13F filer in this file. Self-reported retail, not an institution’s vote.`),
+    );
+  } else {
+    status.append(document.createTextNode(`Stored. ${shareText}. The 13F comparison did not load, so no percent is shown.`));
+  }
+  status.scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+async function loadBrokerMap(): Promise<BrokerMapFile | null> {
+  try {
+    const response = await fetch("/data/broker-13f.json", { headers: { accept: "application/json" } });
+    if (!response.ok) return null;
+    return (await response.json()) as BrokerMapFile;
+  } catch {
+    return null;
+  }
 }
 
 function messageFor(error: string | undefined): string {
@@ -165,18 +227,40 @@ function paint(payload: Totals): void {
     if (rows.length === 0) {
       const tr = document.createElement("tr");
       const td = document.createElement("td");
-      td.colSpan = 4;
+      td.colSpan = 6;
       td.textContent = "No counted shares yet.";
       tr.append(td);
       body.append(tr);
     } else {
       for (const row of rows) {
         const tr = document.createElement("tr");
+        const counted = row.for + row.against + row.undecided;
+        const match = brokerMap?.brokers?.[row.broker];
         for (const value of [row.broker, numberFormat.format(row.for), numberFormat.format(row.against), numberFormat.format(row.undecided)]) {
           const td = document.createElement("td");
           td.textContent = value;
           tr.append(td);
         }
+        const pctCell = document.createElement("td");
+        const filerCell = document.createElement("td");
+        if (match?.status === "matched" && match.shares && match.shortLabel) {
+          pctCell.textContent = `${formatInt(counted)} counted · ${formatTinyPct(counted, match.shares)} of ${match.shortLabel}’s reported 13F`;
+          if (match.sourceUrl) {
+            const link = document.createElement("a");
+            link.href = match.sourceUrl;
+            link.textContent = match.filer || "13F index";
+            filerCell.append(link);
+          } else {
+            filerCell.textContent = match.filer || match.shortLabel;
+          }
+        } else if (!brokerMap) {
+          pctCell.textContent = "—";
+          filerCell.textContent = "13F comparison did not load";
+        } else {
+          pctCell.textContent = "—";
+          filerCell.textContent = "no matching 13F filer";
+        }
+        tr.append(pctCell, filerCell);
         body.append(tr);
       }
     }

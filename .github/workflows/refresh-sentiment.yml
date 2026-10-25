@@ -53,4 +53,4 @@ jobs:
             --base main \
             --head "$branch" \
             --title "Update sentiment series" \
-            --body "Daily fetch of the Polymarket YES history for the December 31 announcement market, plus the GDELT headline score when that API returns rows. scripts/fetch_sentiment.py does not invent missing days. Kalshi stays “No market yet” when the search finds nothing."
+            --body "Daily fetch of Polymarket YES history. The December 31 announcement market stays the default line. Other deadlines and Manifold bet histories are separate series when the APIs return them. Headlines come from GDELT, with retries, then a Google News RSS title score if GDELT returns nothing. The script does not invent missing days. Kalshi stays “No market yet” when the search finds nothing."

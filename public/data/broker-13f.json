@@ -1,0 +1,98 @@
+{
+  "generatedFrom": "public/data/holders.json",
+  "holdersGeneratedAt": "2026-10-24T00:15:34+00:00",
+  "cusip": "88160R101",
+  "reportPeriod": "2026-06-30",
+  "tableShares": 1702692657,
+  "tableManagers": 4292,
+  "datasetPage": "https://www.sec.gov/data-research/sec-markets-data/form-13f-data-sets",
+  "datasetUrl": "https://www.sec.gov/files/datastandardsinnovation/data/form-13f-data-sets/01jun2026-31aug2026_form13f.zip",
+  "note": "Self-reported retail shares divided by one filer\u2019s reported 13F shares. Not the filer\u2019s vote, and not a percent of shares outstanding. Parent and sub-adviser rows are not added.",
+  "brokers": {
+    "Schwab": {
+      "status": "matched",
+      "filer": "CHARLES SCHWAB INVESTMENT MANAGEMENT INC",
+      "shortLabel": "Charles Schwab IM",
+      "cik": "884546",
+      "shares": 19281939,
+      "filingDate": "2026-08-14",
+      "reportPeriod": "2026-06-30",
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/884546/000175272426000057/0001752724-26-000057-index.html",
+      "rule": "The only filing-manager name containing Schwab in this period is CHARLES SCHWAB INVESTMENT MANAGEMENT INC. That is the asset-manager 13F, not every share custodied at Schwab brokerage."
+    },
+    "Fidelity": {
+      "status": "matched",
+      "filer": "FMR LLC",
+      "shortLabel": "FMR LLC",
+      "cik": "315066",
+      "shares": 39766224,
+      "filingDate": "2026-08-13",
+      "reportPeriod": "2026-06-30",
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/315066/000031506626002260/0000315066-26-002260-index.html",
+      "rule": "No filing-manager name contains Fidelity. FMR LLC is the Fidelity parent\u2019s 13F. Geode Capital Management is a separate filer and is not used."
+    },
+    "Vanguard": {
+      "status": "matched",
+      "filer": "VANGUARD CAPITAL MANAGEMENT LLC",
+      "shortLabel": "Vanguard Capital Management",
+      "cik": "2100119",
+      "shares": 184023551,
+      "filingDate": "2026-08-13",
+      "reportPeriod": "2026-06-30",
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2100119/000210011926001527/0002100119-26-001527-index.html",
+      "rule": "10 filing-manager names contain Vanguard. This map uses the one with the most reported shares and does not add the others."
+    },
+    "E*TRADE/Morgan Stanley": {
+      "status": "matched",
+      "filer": "MORGAN STANLEY",
+      "shortLabel": "Morgan Stanley",
+      "cik": "895421",
+      "shares": 38872087,
+      "filingDate": "2026-08-13",
+      "reportPeriod": "2026-06-30",
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/895421/000089542126000243/0000895421-26-000243-index.html",
+      "rule": "No filing-manager name is E*TRADE. The broker label on this site is E*TRADE/Morgan Stanley, so the row is the exact name MORGAN STANLEY. JPMorgan is a different firm and is not used."
+    },
+    "Merrill": {
+      "status": "matched",
+      "filer": "BANK OF AMERICA CORP /DE/",
+      "shortLabel": "Bank of America",
+      "cik": "70858",
+      "shares": 18117418,
+      "filingDate": "2026-08-14",
+      "reportPeriod": "2026-06-30",
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/70858/000007085826000442/0000070858-26-000442-index.html",
+      "rule": "No filing-manager name contains Merrill Lynch. Merrill\u2019s parent, BANK OF AMERICA CORP /DE/, is the 13F row. The percent is of that filer\u2019s reported shares, not of Merrill brokerage accounts."
+    },
+    "Robinhood": {
+      "status": "none",
+      "reportPeriod": "2026-06-30",
+      "rule": "No filing-manager name in this period contains Robinhood."
+    },
+    "Webull": {
+      "status": "none",
+      "reportPeriod": "2026-06-30",
+      "rule": "No filing-manager name in this period contains Webull."
+    },
+    "SoFi": {
+      "status": "none",
+      "reportPeriod": "2026-06-30",
+      "rule": "No filing-manager name in this period contains SoFi or Social Finance."
+    },
+    "Public": {
+      "status": "none",
+      "reportPeriod": "2026-06-30",
+      "rule": "Pension funds with \u201cPublic\u201d in the name are not the broker Public. No manager is named Public or Public.com."
+    },
+    "Interactive Brokers": {
+      "status": "none",
+      "reportPeriod": "2026-06-30",
+      "rule": "No filing-manager name in this period contains Interactive Brokers or IBKR."
+    },
+    "Other": {
+      "status": "none",
+      "reportPeriod": "2026-06-30",
+      "rule": "Other is not a filer."
+    }
+  }
+}

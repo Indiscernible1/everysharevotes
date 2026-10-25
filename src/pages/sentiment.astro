@@ -7,7 +7,7 @@ const file = sentiment as {
   media?: { method?: string; query?: string; points?: unknown[] };
   market?: {
     primary?: { question?: string; url?: string; points?: unknown[] } | null;
-    venues?: { venue?: string; question?: string | null; yes?: number | null; url?: string; inChart?: boolean; note?: string; status?: string }[];
+    venues?: { venue?: string; question?: string | null; yes?: number | null; url?: string; inChart?: boolean; chartable?: boolean; historyPoints?: number; note?: string; status?: string }[];
   };
 };
 const venues = file.market?.venues ?? [];
@@ -29,6 +29,15 @@ const venues = file.market?.venues ?? [];
     </p>
     <div id="sentiment-chart" class="chart"></div>
     <p id="chart-note" class="source"></p>
+    <ul id="series-stamps" class="clean source"></ul>
+    <h2>What this chart means</h2>
+    <p>
+      Each line is a different measurement. Retail is self-reported For shares divided by For plus Against. It is not an official vote and not a sample of all holders.
+      A market line is the YES price of one contract. Contracts are not averaged. Media is a headline score only on days a source returned one.
+      A gap means that day had no returned value. It is not drawn as zero.
+    </p>
+    <h2>Other markets</h2>
+    <div id="market-toggles"></div>
     <p class="score-meta" id="score-meta"></p>
     <p class="visually-hidden" id="for-shares"></p>
     <p class="visually-hidden" id="against-shares"></p>
@@ -59,7 +68,7 @@ const venues = file.market?.venues ?? [];
             <th>Venue</th>
             <th>Question</th>
             <th>Latest YES</th>
-            <th>In the line</th>
+            <th>Chart</th>
           </tr>
         </thead>
         <tbody>
@@ -75,7 +84,15 @@ const venues = file.market?.venues ?? [];
                   )}
                 </td>
                 <td>{typeof venue.yes === "number" ? `${(venue.yes * 100).toFixed(1)}%` : "—"}</td>
-                <td>{venue.inChart ? "Yes" : "No"}</td>
+                <td>
+                  {
+                    venue.inChart
+                      ? "Default line"
+                      : venue.chartable || (venue.historyPoints ?? 0) > 0
+                        ? "Optional"
+                        : "No history"
+                  }
+                </td>
               </tr>
             ))
           }

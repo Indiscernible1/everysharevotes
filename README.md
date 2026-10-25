@@ -131,9 +131,26 @@ Static pages do not need those secrets. The ledger does.
 2. The workflow needs the default `GITHUB_TOKEN` permissions this file requests: `contents: write` and `pull-requests: write`.
 3. When `public/data/holders.json` changes, the workflow pushes branch `data/13f-YYYYMMDD` and opens a pull request. Review it before merging. Do not add the share column across managers. A parent and a sub-adviser can both report the same shares.
 
+## Broker percent of a 13F filer
+
+`scripts/broker_13f.py` reads `public/data/holders.json` and writes `public/data/broker-13f.json`. Run it after a 13F refresh:
+
+```bash
+python3 scripts/test_broker_13f.py
+python3 scripts/broker_13f.py
+```
+
+The Add shares page divides counted self-reported shares by one mapped filer’s reported shares. Robinhood, Webull, SoFi, Public, Interactive Brokers, and Other stay “no matching 13F filer.” The percent is not that institution’s vote.
+
 ## Daily sentiment refresh
 
-`.github/workflows/refresh-sentiment.yml` runs every day at 14:10 UTC. It runs `scripts/fetch_sentiment.py` and opens a pull request when `public/data/sentiment.json` changes. The script reads public Polymarket, Manifold, Kalshi, and GDELT endpoints. It does not need an API key. GDELT rate-limits aggressive clients; an empty media series is a real result.
+`.github/workflows/refresh-sentiment.yml` runs every day at 14:10 UTC. It runs `scripts/fetch_sentiment.py` and opens a pull request when `public/data/sentiment.json` changes. Run the same script by hand:
+
+```bash
+python3 scripts/fetch_sentiment.py
+```
+
+The script reads public Polymarket CLOB history (the December 31 market, plus the other deadlines on that event as separate series), Manifold bets, and the Kalshi pages it already checks. It does not need an API key. For headlines it calls GDELT, waits, and retries on HTTP 429. If that still fails it tries a shorter GDELT article list, then titles from the Google News RSS search for `Tesla SpaceX merger`, scored with the lexicon in the script. If every headline request fails and an older file already has media points, those points are kept and the new attempts are recorded. Days that were not returned are not invented. An empty media series is a real result. On the sentiment page, only the December 31 Polymarket line is on by default. Other series appear as checkboxes when they have history.
 
 Refresh institutional votes by hand:
 

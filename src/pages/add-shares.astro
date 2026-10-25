@@ -68,15 +68,22 @@ const sitekey = usableTurnstileSiteKey(import.meta.env.PUBLIC_TURNSTILE_SITE_KEY
     </form>
 
     <h2>By broker</h2>
+    <p class="source">
+      Counted shares are self-reported retail entries. A percent is those shares divided by one filer’s reported 13F position for the latest period in the holders file. It is not inside that institution’s vote. Brokers with no mapped filer say so.
+    </p>
     <div class="table-wrap">
       <table>
-        <caption class="visually-hidden">Counted shares by broker and stance.</caption>
+        <caption class="visually-hidden">
+          Counted self-reported shares by broker. The percent is those shares divided by one matching 13F filer’s reported shares, not that filer’s vote.
+        </caption>
         <thead>
           <tr>
             <th>Broker</th>
             <th>For</th>
             <th>Against</th>
             <th>Undecided</th>
+            <th>% of filer’s 13F</th>
+            <th>13F filer</th>
           </tr>
         </thead>
         <tbody id="broker-body">
@@ -88,6 +95,8 @@ const sitekey = usableTurnstileSiteKey(import.meta.env.PUBLIC_TURNSTILE_SITE_KEY
     <h2>Change over time</h2>
     <div id="sentiment-chart" class="chart"></div>
     <p id="chart-note" class="source"></p>
+    <ul id="series-stamps" class="clean source"></ul>
+    <p id="retail-vs-13f" class="source"></p>
 
     <h2>Rows on this browser</h2>
     <ul id="your-rows" class="clean"></ul>

@@ -13,6 +13,8 @@ const file = sentiment as {
     requests?: { url: string; status: number; points: number }[];
     lexicon?: { positive?: string[]; negative?: string[] };
     points?: unknown[];
+    cached?: boolean;
+    cachedFrom?: string | null;
   };
   market?: {
     primary?: { question?: string; marketId?: string; url?: string; historyUrl?: string; points?: unknown[] } | null;
@@ -57,11 +59,19 @@ const file = sentiment as {
       Cloudflare Turnstile has to succeed before a row is stored. On a public host the test secret is rejected. If the salt or the Turnstile secret is missing, the API returns an error and the page does not pretend the total is zero.
     </p>
 
+    <h2>Compared with 13F filings</h2>
+    <p>
+      A counted retail entry can be shown as a percent of one Form 13F filer. <code>scripts/broker_13f.py</code> reads <code>public/data/holders.json</code> and writes <code>public/data/broker-13f.json</code>.
+      Schwab uses Charles Schwab Investment Management, the only Schwab-named manager. Fidelity uses FMR LLC, because no manager name says Fidelity. Vanguard uses the Vanguard-named filer with the most reported shares and does not add the other Vanguard filers.
+      E*TRADE/Morgan Stanley uses the exact name Morgan Stanley. Merrill uses Bank of America Corp /DE/, because no manager is named Merrill Lynch. Robinhood, Webull, SoFi, Public, Interactive Brokers, and Other have no matching filer, and the page says so.
+      The percent is self-reported shares divided by that filer’s reported shares for the primary report period. It is not the filer’s vote and not a percent of shares outstanding.
+    </p>
+
     <h2>Prediction markets</h2>
     <p>
       The market line is the YES price for one Polymarket contract: “{file.market?.primary?.question ?? "Tesla and SpaceX merger officially announced by December 31?"}”
       (market {file.market?.primary?.marketId ?? "2252540"}). Each point is the last price the CLOB history returned for that UTC day.
-      Other deadlines on the same event, and Manifold markets with different wording, are listed on the sentiment page and are not averaged in.
+      Other deadlines on the same event are fetched as their own series. The sentiment page can draw one when its price history came back. They are not averaged into the December 31 line. Manifold history comes from filled bets when that API returns them.
       {file.market?.primary?.url && <a href={file.market.primary.url}>Polymarket page</a>}
       {file.market?.primary?.historyUrl && <> · <a href={file.market.primary.historyUrl}>price history</a></>}
     </p>
@@ -75,7 +85,9 @@ const file = sentiment as {
       The media series uses the GDELT DOC 2.0 API. Query: <code>{file.media?.query}</code>. Timespan: three months.
       {file.media?.method === "gdelt-tone" && " This file uses GDELT’s average tone."}
       {file.media?.method === "title-lexicon" && " GDELT did not return a tone timeline, so titles from the article list were scored with the word lists below."}
-      {file.media?.method === "none" && " This file has no media points. The requests did not return a tone series or a scored article list."}
+      {file.media?.method === "none" && " This file has no media points. The requests did not return a tone series, a scored article list, or a usable headline feed."}
+      {file.media?.method === "google-news-rss-lexicon" && " GDELT did not return points, so titles from the Google News RSS search were scored with the same word lists."}
+      {file.media?.cached && " This run kept an earlier file’s points because the new requests failed."}
       {" "}
       {file.media?.points?.length ?? 0} days are stored. Days without a returned value are not drawn as zero.
     </p>

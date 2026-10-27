@@ -1,26 +1,21 @@
 {
-  "generatedAt": "2026-10-25T00:54:09.279114+00:00",
+  "generatedAt": "2026-10-27T19:23:51.471780+00:00",
   "media": {
-    "method": "google-news-rss-lexicon",
-    "query": "Tesla SpaceX merger",
-    "source": "Google News RSS search, scored with the title lexicon",
-    "sourceUrl": "https://news.google.com/rss/search?q=Tesla+SpaceX+merger&hl=en-US&gl=US&ceid=US%3Aen",
-    "timespan": "rss",
+    "method": "title-lexicon",
+    "query": "\"Tesla\" \"SpaceX\" merger",
+    "source": "GDELT DOC 2.0 API",
+    "sourceUrl": "https://api.gdeltproject.org/api/v2/doc/doc",
+    "timespan": "14days",
     "requests": [
       {
         "url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22Tesla%22+%22SpaceX%22+merger&mode=timelinetone&format=json&timespan=3months",
-        "status": 200,
-        "points": 0
-      },
-      {
-        "url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22Tesla%22+%22SpaceX%22+merger&mode=artlist&format=json&timespan=14days&maxrecords=25",
         "status": 429,
         "points": 0
       },
       {
-        "url": "https://news.google.com/rss/search?q=Tesla+SpaceX+merger&hl=en-US&gl=US&ceid=US%3Aen",
+        "url": "https://api.gdeltproject.org/api/v2/doc/doc?query=%22Tesla%22+%22SpaceX%22+merger&mode=artlist&format=json&timespan=14days&maxrecords=25",
         "status": 200,
-        "points": 8
+        "points": 6
       }
     ],
     "cached": false,
@@ -81,49 +76,37 @@
     },
     "points": [
       {
-        "date": "2026-10-16",
-        "tone": 0.0,
-        "display": 50.0,
-        "articles": 2
-      },
-      {
-        "date": "2026-10-19",
+        "date": "2026-10-20",
         "tone": 0.0,
         "display": 50.0,
         "articles": 5
       },
       {
-        "date": "2026-10-20",
-        "tone": 0.0042,
-        "display": 50.21,
-        "articles": 12
-      },
-      {
         "date": "2026-10-21",
-        "tone": 0.0017,
-        "display": 50.08,
-        "articles": 34
+        "tone": 0.007,
+        "display": 50.35,
+        "articles": 11
       },
       {
         "date": "2026-10-22",
         "tone": 0.0,
         "display": 50.0,
-        "articles": 33
+        "articles": 6
       },
       {
         "date": "2026-10-23",
         "tone": 0.0,
         "display": 50.0,
-        "articles": 6
+        "articles": 1
       },
       {
         "date": "2026-10-24",
         "tone": 0.0,
         "display": 50.0,
-        "articles": 7
+        "articles": 1
       },
       {
-        "date": "2026-10-25",
+        "date": "2026-10-26",
         "tone": 0.0,
         "display": 50.0,
         "articles": 1
@@ -139,7 +122,7 @@
       "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-december-31",
       "historyUrl": "https://clob.polymarket.com/prices-history?market=54008746047030401937229622392846672148881831664328316511258982815120785809185&interval=max&fidelity=1440",
       "historyStatus": 200,
-      "asOf": "2026-10-25T00:54:09.279114+00:00",
+      "asOf": "2026-10-27T19:23:51.471780+00:00",
       "points": [
         {
           "date": "2026-05-14",
@@ -792,6 +775,10 @@
         {
           "date": "2026-10-24",
           "yes": 0.185
+        },
+        {
+          "date": "2026-10-27",
+          "yes": 0.135
         }
       ],
       "note": "One UTC-day snapshot, the last YES price returned for that day. No days were filled in."
@@ -804,7 +791,7 @@
         "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-september-30",
         "historyUrl": "https://clob.polymarket.com/prices-history?market=48029449843945686586979008658948178079028449323933797256276105854273081505855&interval=max&fidelity=1440",
         "historyStatus": 200,
-        "asOf": "2026-10-25T00:54:09.279114+00:00",
+        "asOf": "2026-10-27T19:23:51.471780+00:00",
         "points": [
           {
             "date": "2026-06-10",
@@ -1272,7 +1259,7 @@
         "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-january-31-2027",
         "historyUrl": "https://clob.polymarket.com/prices-history?market=57382591449144984923528298060764506035156609570971253096896047744168942224941&interval=max&fidelity=1440",
         "historyStatus": 200,
-        "asOf": "2026-10-25T00:54:09.279114+00:00",
+        "asOf": "2026-10-27T19:23:51.471780+00:00",
         "points": [
           {
             "date": "2026-08-15",
@@ -1549,6 +1536,10 @@
           {
             "date": "2026-10-25",
             "yes": 0.23
+          },
+          {
+            "date": "2026-10-27",
+            "yes": 0.24
           }
         ],
         "note": "Separate deadline. Not averaged with the December 31 line."
@@ -1560,7 +1551,7 @@
         "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-december-31-2027",
         "historyUrl": "https://clob.polymarket.com/prices-history?market=108138125495806962416231121099670266672790166921750582313787014969635975847592&interval=max&fidelity=1440",
         "historyStatus": 200,
-        "asOf": "2026-10-25T00:54:09.279114+00:00",
+        "asOf": "2026-10-27T19:23:51.471780+00:00",
         "points": [
           {
             "date": "2026-08-15",
@@ -1841,6 +1832,10 @@
           {
             "date": "2026-10-24",
             "yes": 0.655
+          },
+          {
+            "date": "2026-10-27",
+            "yes": 0.63
           }
         ],
         "note": "Separate deadline. Not averaged with the December 31 line."
@@ -1852,7 +1847,7 @@
         "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-february-28-2027",
         "historyUrl": "https://clob.polymarket.com/prices-history?market=92665346553485129648444851493722237317432823505802074242836590350713974513233&interval=max&fidelity=1440",
         "historyStatus": 200,
-        "asOf": "2026-10-25T00:54:09.279114+00:00",
+        "asOf": "2026-10-27T19:23:51.471780+00:00",
         "points": [
           {
             "date": "2026-08-15",
@@ -2125,6 +2120,10 @@
           {
             "date": "2026-10-24",
             "yes": 0.345
+          },
+          {
+            "date": "2026-10-27",
+            "yes": 0.285
           }
         ],
         "note": "Separate deadline. Not averaged with the December 31 line."
@@ -2136,7 +2135,7 @@
         "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-june-30-2027",
         "historyUrl": "https://clob.polymarket.com/prices-history?market=97993157528042721726853253346196174330986354557287106653896852893323543480072&interval=max&fidelity=1440",
         "historyStatus": 200,
-        "asOf": "2026-10-25T00:54:09.279114+00:00",
+        "asOf": "2026-10-27T19:23:51.471780+00:00",
         "points": [
           {
             "date": "2026-08-15",
@@ -2413,6 +2412,10 @@
           {
             "date": "2026-10-24",
             "yes": 0.595
+          },
+          {
+            "date": "2026-10-27",
+            "yes": 0.52
           }
         ],
         "note": "Separate deadline. Not averaged with the December 31 line."
@@ -2424,7 +2427,7 @@
         "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-june-30",
         "historyUrl": "https://clob.polymarket.com/prices-history?market=93492671457908566406173230771295829296612782822765483768198668651161854192557&interval=max&fidelity=1440",
         "historyStatus": 200,
-        "asOf": "2026-10-25T00:54:09.279114+00:00",
+        "asOf": "2026-10-27T19:23:51.471780+00:00",
         "points": [
           {
             "date": "2026-01-31",
@@ -2955,7 +2958,7 @@
         "question": "Will Tesla and SpaceX officially announce a merger, or a formal merger process, by December 31, 2026?",
         "url": "https://manifold.markets/BarryJones/will-tesla-and-spacex-officially-an",
         "historyStatus": 200,
-        "asOf": "2026-10-25T00:54:09.279114+00:00",
+        "asOf": "2026-10-27T19:23:51.471780+00:00",
         "points": [
           {
             "date": "2026-10-06",
@@ -2990,7 +2993,7 @@
         "question": "SpaceX & Tesla Merger before 2028",
         "url": "https://manifold.markets/Babawagen/spacex-tesla-merger-before-2028",
         "historyStatus": 200,
-        "asOf": "2026-10-25T00:54:09.279114+00:00",
+        "asOf": "2026-10-27T19:23:51.471780+00:00",
         "points": [
           {
             "date": "2026-05-28",
@@ -3075,6 +3078,10 @@
           {
             "date": "2026-10-22",
             "yes": 0.7195453142985544
+          },
+          {
+            "date": "2026-10-26",
+            "yes": 0.6946255154476266
           }
         ],
         "note": "Filled-bet history for this Manifold question. Not averaged with Polymarket."
@@ -3085,7 +3092,7 @@
         "question": "Will SpaceX combine with Tesla in 2026?",
         "url": "https://manifold.markets/ac/will-spacex-combine-with-tesla-in-2",
         "historyStatus": 200,
-        "asOf": "2026-10-25T00:54:09.279114+00:00",
+        "asOf": "2026-10-27T19:23:51.471780+00:00",
         "points": [
           {
             "date": "2026-01-15",
@@ -3156,8 +3163,8 @@
         "venue": "Polymarket",
         "question": "Tesla and SpaceX merger officially announced by December 31?",
         "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-december-31",
-        "yes": 0.165,
-        "asOf": "2026-10-25T00:54:09.279114+00:00",
+        "yes": 0.135,
+        "asOf": "2026-10-27T19:23:51.471780+00:00",
         "inChart": true,
         "chartable": true,
         "note": "Default chart line."
@@ -3167,7 +3174,7 @@
         "question": "Tesla and SpaceX merger officially announced by September 30?",
         "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-september-30",
         "yes": 0.0,
-        "asOf": "2026-10-25T00:54:09.279114+00:00",
+        "asOf": "2026-10-27T19:23:51.471780+00:00",
         "inChart": false,
         "chartable": true,
         "note": "Own series. Turn it on from the sentiment page. Not averaged."
@@ -3176,8 +3183,8 @@
         "venue": "Polymarket",
         "question": "Tesla and SpaceX merger officially announced by January 31, 2027?",
         "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-january-31-2027",
-        "yes": 0.23,
-        "asOf": "2026-10-25T00:54:09.279114+00:00",
+        "yes": 0.24,
+        "asOf": "2026-10-27T19:23:51.471780+00:00",
         "inChart": false,
         "chartable": true,
         "note": "Own series. Turn it on from the sentiment page. Not averaged."
@@ -3186,8 +3193,8 @@
         "venue": "Polymarket",
         "question": "Tesla and SpaceX merger officially announced by December 31, 2027?",
         "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-december-31-2027",
-        "yes": 0.655,
-        "asOf": "2026-10-25T00:54:09.279114+00:00",
+        "yes": 0.63,
+        "asOf": "2026-10-27T19:23:51.471780+00:00",
         "inChart": false,
         "chartable": true,
         "note": "Own series. Turn it on from the sentiment page. Not averaged."
@@ -3196,8 +3203,8 @@
         "venue": "Polymarket",
         "question": "Tesla and SpaceX merger officially announced by February 28, 2027?",
         "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-february-28-2027",
-        "yes": 0.3,
-        "asOf": "2026-10-25T00:54:09.279114+00:00",
+        "yes": 0.285,
+        "asOf": "2026-10-27T19:23:51.471780+00:00",
         "inChart": false,
         "chartable": true,
         "note": "Own series. Turn it on from the sentiment page. Not averaged."
@@ -3206,8 +3213,8 @@
         "venue": "Polymarket",
         "question": "Tesla and SpaceX merger officially announced by June 30, 2027?",
         "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-june-30-2027",
-        "yes": 0.585,
-        "asOf": "2026-10-25T00:54:09.279114+00:00",
+        "yes": 0.52,
+        "asOf": "2026-10-27T19:23:51.471780+00:00",
         "inChart": false,
         "chartable": true,
         "note": "Own series. Turn it on from the sentiment page. Not averaged."
@@ -3217,7 +3224,7 @@
         "question": "Tesla and SpaceX merger officially announced by June 30?",
         "url": "https://polymarket.com/event/tesla-and-spacex-merger-officially-announced-by-june-30/tesla-and-spacex-merger-officially-announced-by-june-30",
         "yes": 0.0,
-        "asOf": "2026-10-25T00:54:09.279114+00:00",
+        "asOf": "2026-10-27T19:23:51.471780+00:00",
         "inChart": false,
         "chartable": true,
         "note": "Own series. Turn it on from the sentiment page. Not averaged."
@@ -3227,7 +3234,7 @@
         "question": "Will Tesla and SpaceX officially announce a merger, or a formal merger process, by December 31, 2026?",
         "url": "https://manifold.markets/BarryJones/will-tesla-and-spacex-officially-an",
         "yes": 0.799999999999999,
-        "asOf": "2026-10-25T00:54:09.279114+00:00",
+        "asOf": "2026-10-27T19:23:51.471780+00:00",
         "inChart": false,
         "chartable": true,
         "historyPoints": 6,
@@ -3237,11 +3244,11 @@
         "venue": "Manifold",
         "question": "SpaceX & Tesla Merger before 2028",
         "url": "https://manifold.markets/Babawagen/spacex-tesla-merger-before-2028",
-        "yes": 0.6899999999999998,
-        "asOf": "2026-10-25T00:54:09.279114+00:00",
+        "yes": 0.6946255154476266,
+        "asOf": "2026-10-27T19:23:51.471780+00:00",
         "inChart": false,
         "chartable": true,
-        "historyPoints": 21,
+        "historyPoints": 22,
         "note": "Own series from filled bets. Not averaged with Polymarket."
       },
       {
@@ -3249,7 +3256,7 @@
         "question": "Will SpaceX combine with Tesla in 2026?",
         "url": "https://manifold.markets/ac/will-spacex-combine-with-tesla-in-2",
         "yes": 0.009999999999999978,
-        "asOf": "2026-10-25T00:54:09.279114+00:00",
+        "asOf": "2026-10-27T19:23:51.471780+00:00",
         "inChart": false,
         "chartable": true,
         "historyPoints": 15,
@@ -3259,7 +3266,7 @@
         "venue": "Kalshi",
         "question": null,
         "status": "no-market",
-        "asOf": "2026-10-25T00:55:28.922909+00:00",
+        "asOf": "2026-10-27T19:25:34.910108+00:00",
         "inChart": false,
         "matches": [],
         "note": "No open Kalshi market matching SpaceX and a Tesla combination was in the queried pages."
@@ -3382,6 +3389,10 @@
           {
             "date": "2026-10-22",
             "yes": 0.7195453142985544
+          },
+          {
+            "date": "2026-10-26",
+            "yes": 0.6946255154476266
           }
         ],
         "historyStatus": 200
@@ -3454,7 +3465,7 @@
       }
     ],
     "kalshi": {
-      "checkedAt": "2026-10-25T00:55:28.922909+00:00",
+      "checkedAt": "2026-10-27T19:25:34.910108+00:00",
       "queries": [
         {
           "url": "https://api.elections.kalshi.com/trade-api/v2/events?limit=200&status=open&with_nested_markets=true",
